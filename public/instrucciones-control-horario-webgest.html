@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Horario Webgest — Manual de uso</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #f0f4f8;
+    padding: 20px;
+  }
+
+  .page {
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 60px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    border-radius: 8px;
+  }
+
+  .portada {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 3px solid #1F4E79;
+    margin-bottom: 36px;
+  }
+  .portada .icono { font-size: 60px; margin-bottom: 10px; }
+  .portada h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1F4E79;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .portada .subtitulo {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 28px;
+  }
+  .caja-acceso {
+    background: #1F4E79;
+    color: #fff;
+    border-radius: 10px;
+    padding: 22px 28px;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  .caja-acceso .caja-titulo {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 14px;
+  }
+  .caja-acceso .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .caja-acceso .row .label { opacity: 0.7; min-width: 90px; }
+  .caja-acceso .row .val { font-weight: 600; color: #9DC3E6; word-break: break-all; }
+  .caja-acceso .row .val.cred { color: #fff; font-size: 14px; }
+  .indice {
+    background: #F8FBFF;
+    border: 1px solid #D5E8F0;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .indice h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #2E75B6; margin-bottom: 12px; }
+  .indice ol { padding-left: 20px; }
+  .indice li { margin-bottom: 4px; font-size: 12px; color: #333; }
+  .indice a { color: #2E75B6; text-decoration: none; }
+  .indice a:hover { text-decoration: underline; }
+  h2.seccion {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1F4E79;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1F4E79;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2.seccion .num {
+    background: #1F4E79;
+    color: #fff;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  h3.sub {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2E75B6;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 10px; line-height: 1.6; }
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  ul li { margin-bottom: 5px; line-height: 1.6; }
+  ol.pasos { padding-left: 22px; margin-bottom: 10px; }
+  ol.pasos li { margin-bottom: 7px; line-height: 1.6; }
+  .nota {
+    background: #FFF8E1;
+    border-left: 4px solid #F9A825;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 12.5px;
+    color: #5D4037;
+  }
+  .nota strong { color: #E65100; }
+  .info {
+    background: #E8F4FD;
+    border-left: 4px solid #2E75B6;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 12.5px;
+    color: #1a3a5c;
+  }
+  .tabla-estados {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 12px;
+  }
+  .tabla-estados th {
+    background: #2E75B6;
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .tabla-estados td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .tabla-estados tr:nth-child(even) td { background: #F7F9FC; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.verde { background: #E8F5E9; color: #2E7D32; }
+  .badge.gris { background: #F5F5F5; color: #616161; }
+  .badge.naranja { background: #FFF3E0; color: #E65100; }
+  .badge.azul { background: #E3F2FD; color: #1565C0; }
+  .badge.rojo { background: #FFEBEE; color: #C62828; }
+  .badge.morado { background: #F3E5F5; color: #6A1B9A; }
+  .caja-credenciales {
+    background: #E8F4FD;
+    border: 1px solid #BBDEFB;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+  }
+  .caja-credenciales .line { margin-bottom: 4px; }
+  .caja-credenciales strong { color: #1565C0; }
+  .url-box {
+    background: #F3F4F6;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #0563C1;
+    word-break: break-all;
+  }
+  .pie {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px solid #E0E0E0;
+    font-size: 12px;
+    color: #888;
+  }
+  .pie strong { color: #2E75B6; }
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; border-radius: 0; padding: 20mm 18mm; max-width: 100%; }
+    h2.seccion { page-break-before: auto; break-inside: avoid; }
+    .nota, .info, .caja-acceso, .caja-credenciales { break-inside: avoid; }
+    .indice { display: none; }
+    a { color: inherit; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="portada">
+    <div class="icono">&#x23F1;</div>
+    <h1>CONTROL HORARIO</h1>
+    <p class="subtitulo">Manual de uso &mdash; Panel de Administraci&oacute;n Webgest</p>
+    <div class="caja-acceso">
+      <div class="caja-titulo">Acceso al sistema</div>
+      <div class="row"><span class="label">&#x1F517; Panel fichaje:</span><span class="val">https://control-horario-production-e57a.up.railway.app</span></div>
+      <div class="row"><span class="label">&#x1F510; Panel admin:</span><span class="val">.../admin.html</span></div>
+      <div class="row" style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.2);padding-top:10px">
+        <span class="label">Usuario:</span><span class="val cred">webgest</span>
+      </div>
+      <div class="row"><span class="label">Contrase&ntilde;a:</span><span class="val cred">Webgest2026!</span></div>
+    </div>
+  </div>
+  <div class="indice">
+    <h3>&Iacute;ndice</h3>
+    <ol>
+      <li><a href="#sec1">&iquest;Qu&eacute; es y para qu&eacute; sirve?</a></li>
+      <li><a href="#sec2">C&oacute;mo acceder al panel de administraci&oacute;n</a></li>
+      <li><a href="#sec3">Pantalla principal &mdash; Estado del d&iacute;a</a></li>
+      <li><a href="#sec4">Fichajes &mdash; Consultar y corregir</a></li>
+      <li><a href="#sec5">Gesti&oacute;n de trabajadoras</a></li>
+      <li><a href="#sec6">Gesti&oacute;n de empresas</a></li>
+      <li><a href="#sec7">C&oacute;digos QR &mdash; Carnet de acceso</a></li>
+      <li><a href="#sec8">Tabl&oacute;n de comunicaciones</a></li>
+      <li><a href="#sec9">Exportar el Registro de Jornada (PDF)</a></li>
+      <li><a href="#sec10">Alertas &mdash; Trabajadoras sin fichar</a></li>
+      <li><a href="#sec11">&iquest;C&oacute;mo ficha la trabajadora?</a></li>
+      <li><a href="#sec12">Preguntas frecuentes</a></li>
+    </ol>
+  </div>
+  <h2 class="seccion" id="sec1"><span class="num">1</span> &iquest;Qu&eacute; es y para qu&eacute; sirve?</h2>
+  <p>Control Horario gestiona el fichaje de todas las trabajadoras de las empresas de limpieza administradas por Webgest. Cumple con el <strong>RD-ley 8/2019 (art. 34.9 ET)</strong> de registro diario de jornada.</p>
+  <p>Desde el panel de administraci&oacute;n pod&eacute;is:</p>
+  <ul>
+    <li>Ver en tiempo real qui&eacute;n est&aacute; trabajando, en pausa o ha terminado su jornada.</li>
+    <li>Consultar y corregir registros de fichaje de cualquier trabajadora.</li>
+    <li>Gestionar altas, bajas y modificaciones de trabajadoras y empresas.</li>
+    <li>Publicar mensajes en el Tabl&oacute;n de cada trabajadora (centros asignados, instrucciones, etc.).</li>
+    <li>Generar el PDF oficial del Registro de Jornada para inspecciones o para la trabajadora.</li>
+    <li>Ver alertas de trabajadoras activas que no han fichado en el d&iacute;a.</li>
+    <li>Generar y entregar los c&oacute;digos QR de acceso r&aacute;pido (carnet) a cada trabajadora.</li>
+  </ul>
+
+  <h2 class="seccion" id="sec2"><span class="num">2</span> C&oacute;mo acceder al panel de administraci&oacute;n</h2>
+  <p>Abrir el navegador y entrar en:</p>
+  <div class="url-box">https://control-horario-production-e57a.up.railway.app/admin.html</div>
+  <p>Tambi&eacute;n hay un acceso directo en el escritorio: <strong>&laquo;Control Horario - ADMIN&raquo;</strong>.</p>
+  <div class="caja-credenciales">
+    <div class="line"><strong>Usuario:</strong> webgest</div>
+    <div class="line"><strong>Contrase&ntilde;a:</strong> Webgest2026!</div>
+  </div>
+  <div class="nota"><strong>IMPORTANTE:</strong> No compartir estas credenciales con las trabajadoras. Ellas acceden por su propio sistema (DNI + PIN o c&oacute;digo QR).</div>
+
+  <h2 class="seccion" id="sec3"><span class="num">3</span> Pantalla principal &mdash; Estado del d&iacute;a</h2>
+  <p>Al iniciar sesi&oacute;n aparece el <strong>Estado del d&iacute;a</strong>. Muestra todas las trabajadoras activas con su situaci&oacute;n en tiempo real.</p>
+  <table class="tabla-estados">
+    <thead><tr><th>Estado</th><th>Significado</th><th>Indicador</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge gris">Sin fichar</span></td><td>A&uacute;n no ha iniciado jornada hoy</td><td>Gris</td></tr>
+      <tr><td><span class="badge verde">En jornada</span></td><td>Trabajando en este momento</td><td>Verde</td></tr>
+      <tr><td><span class="badge naranja">En pausa</span></td><td>Ha pausado la jornada</td><td>Naranja</td></tr>
+      <tr><td><span class="badge azul">Completada</span></td><td>Jornada terminada correctamente</td><td>Azul</td></tr>
+      <tr><td><span class="badge rojo">IT</span></td><td>Incapacidad temporal &mdash; no puede fichar</td><td>Rojo</td></tr>
+      <tr><td><span class="badge rojo">Baja</span></td><td>Baja laboral</td><td>Rojo oscuro</td></tr>
+      <tr><td><span class="badge morado">Vacaciones</span></td><td>En per&iacute;odo vacacional</td><td>Morado</td></tr>
+    </tbody>
+  </table>
+  <p>Usar el desplegable superior para <strong>filtrar por empresa</strong>. Pulsar &laquo;Actualizar&raquo; para refrescar.</p>
+  <div class="nota"><strong>NOTA:</strong> El sistema cierra autom&aacute;ticamente la jornada cuando se cumplen las horas contratadas, aunque la trabajadora no pulse &laquo;Finalizar&raquo;. Aparece con &#x26A1; en el historial.</div>
+
+  <h2 class="seccion" id="sec4"><span class="num">4</span> Fichajes &mdash; Consultar y corregir</h2>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;Fichajes&raquo;</strong>. Filtros por empresa, trabajadora y rango de fechas.</p>
+  <h3 class="sub">4.1 C&oacute;mo filtrar</h3>
+  <ul>
+    <li>Seleccionar empresa en el primer desplegable.</li>
+    <li>Al seleccionar empresa, aparecen sus trabajadoras en el siguiente desplegable.</li>
+    <li>Opcionalmente poner fechas &laquo;Desde&raquo; y &laquo;Hasta&raquo;.</li>
+    <li>Pulsar &laquo;Buscar&raquo;.</li>
+  </ul>
+  <h3 class="sub">4.2 Corregir un fichaje</h3>
+  <p>Solo Webgest puede modificar registros. Cada modificaci&oacute;n queda registrada con el motivo, fecha y usuario.</p>
+  <ol class="pasos">
+    <li>Localizar el fichaje con los filtros.</li>
+    <li>Pulsar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> en la fila.</li>
+    <li>Introducir la hora de entrada y/o salida en <strong>hora de Madrid</strong> (formato HH:MM).</li>
+    <li>Rellenar <strong>obligatoriamente</strong> el campo &laquo;Motivo de modificaci&oacute;n&raquo;.</li>
+    <li>Pulsar &laquo;Guardar&raquo;.</li>
+  </ol>
+  <div class="info">Las horas se introducen en hora de Madrid. El sistema las convierte autom&aacute;ticamente de forma interna.</div>
+
+  <h2 class="seccion" id="sec5"><span class="num">5</span> Gesti&oacute;n de trabajadoras</h2>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;Trabajadoras&raquo;</strong>. Se puede filtrar por empresa.</p>
+  <h3 class="sub">5.1 Alta de nueva trabajadora</h3>
+  <ol class="pasos">
+    <li>Pulsar <strong>&laquo;+ Nueva&raquo;</strong> en la parte superior derecha.</li>
+    <li>Rellenar: Empresa, Apellidos, Nombre, DNI, PIN (4 d&iacute;gitos), Horas/d&iacute;a, D&iacute;as/mes, Tel&eacute;fono y Situaci&oacute;n.</li>
+    <li>El PIN es la contrase&ntilde;a personal de la trabajadora para el panel de fichaje.</li>
+    <li>Pulsar &laquo;Guardar&raquo;.</li>
+  </ol>
+  <h3 class="sub">5.2 Modificar datos</h3>
+  <ol class="pasos">
+    <li>Pulsar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> en su fila.</li>
+    <li>Cambiar los campos necesarios (dejar PIN en blanco si no se quiere modificar).</li>
+    <li>Pulsar &laquo;Guardar&raquo;.</li>
+  </ol>
+  <h3 class="sub">5.3 Dar de baja</h3>
+  <ol class="pasos">
+    <li>Pulsar <strong>&laquo;Baja&raquo;</strong> en la fila y confirmar. La trabajadora no podr&aacute; fichar.</li>
+  </ol>
+  <h3 class="sub">5.4 Cambiar situaci&oacute;n (IT, vacaciones&hellip;)</h3>
+  <p>Usar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> y cambiar el campo <em>Situaci&oacute;n</em>:</p>
+  <ul>
+    <li><strong>activa</strong> &rarr; trabaja con normalidad.</li>
+    <li><strong>it</strong> &rarr; Incapacidad Temporal; no puede fichar ni aparece en alertas.</li>
+    <li><strong>vacaciones</strong> &rarr; no aparece en alertas de &laquo;sin fichar&raquo;.</li>
+    <li><strong>baja</strong> &rarr; baja laboral definitiva.</li>
+  </ul>
+
+  <h2 class="seccion" id="sec6"><span class="num">6</span> Gesti&oacute;n de empresas</h2>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;Empresas&raquo;</strong>. Crear nuevas empresas o modificar datos (nombre, NIF/CIF, CCC).</p>
+  <ul>
+    <li><strong>&laquo;+ Nueva&raquo;</strong> para crear una empresa.</li>
+    <li><strong>&laquo;Editar&raquo;</strong> para modificar nombre, NIF o CCC.</li>
+    <li><strong>&laquo;Dar de baja&raquo;</strong> para desactivarla.</li>
+  </ul>
+
+  <h2 class="seccion" id="sec7"><span class="num">7</span> C&oacute;digos QR &mdash; Carnet de acceso</h2>
+  <p>Cada trabajadora tiene un <strong>c&oacute;digo QR &uacute;nico</strong> para acceder sin teclear DNI ni PIN. Ideal para imprimir o enviar por WhatsApp.</p>
+  <h3 class="sub">7.1 Ver y entregar el QR</h3>
+  <ol class="pasos">
+    <li>Ir a <strong>&laquo;Trabajadoras&raquo;</strong>.</li>
+    <li>Pulsar <strong>&laquo;QR&raquo;</strong> en la fila de la trabajadora.</li>
+    <li>Se abre la ventana con el QR y la URL de acceso directo.</li>
+    <li>Pulsar <strong>&laquo;Copiar URL&raquo;</strong> para enviarla por WhatsApp, o capturar el QR para imprimirlo.</li>
+  </ol>
+  <h3 class="sub">7.2 Regenerar el QR</h3>
+  <p>En la ventana del QR, pulsar <strong>&laquo;Regenerar&raquo;</strong>. El c&oacute;digo anterior queda invalidado y se genera uno nuevo.</p>
+  <h3 class="sub">7.3 Ver el panel de la trabajadora</h3>
+  <p>El bot&oacute;n <strong>&laquo;Panel&raquo;</strong> abre el panel de fichaje de esa trabajadora en una nueva pesta&ntilde;a.</p>
+
+  <h2 class="seccion" id="sec8"><span class="num">8</span> Tabl&oacute;n de comunicaciones</h2>
+  <p>El Tabl&oacute;n publica <strong>mensajes informativos</strong> para cada trabajadora. Ella los ve en su panel (pesta&ntilde;a &laquo;Tabl&oacute;n&raquo;) pero no puede responder. &Uacute;til para:</p>
+  <ul>
+    <li>Centros de trabajo asignados y direcciones.</li>
+    <li>Cambios de horario o instrucciones especiales.</li>
+    <li>Cualquier informaci&oacute;n que necesite tener a mano.</li>
+  </ul>
+  <h3 class="sub">8.1 Publicar un mensaje</h3>
+  <ol class="pasos">
+    <li>Ir a <strong>&laquo;Tabl&oacute;n&raquo;</strong> en el men&uacute; lateral.</li>
+    <li>Seleccionar la empresa y la trabajadora.</li>
+    <li>Pulsar <strong>&laquo;+ Nuevo mensaje&raquo;</strong>.</li>
+    <li>Escribir t&iacute;tulo y contenido, luego &laquo;Publicar&raquo;.</li>
+  </ol>
+  <div class="info">Desde <strong>&laquo;Trabajadoras&raquo;</strong>, el bot&oacute;n <strong>&laquo;Tabl&oacute;n&raquo;</strong> lleva directamente al tabl&oacute;n de esa trabajadora.</div>
+  <h3 class="sub">8.2 Editar o eliminar un mensaje</h3>
+  <p>Cada mensaje tiene los botones <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> y <strong>&laquo;&#x1F5D1; Eliminar&raquo;</strong>.</p>
+
+  <h2 class="seccion" id="sec9"><span class="num">9</span> Exportar el Registro de Jornada (PDF)</h2>
+  <p>El PDF cumple el formato del <strong>RD-ley 8/2019</strong> para inspecciones (ITSS), la trabajadora o su representante.</p>
+  <ol class="pasos">
+    <li>Ir a <strong>&laquo;Exportar PDF&raquo;</strong> en el men&uacute; lateral.</li>
+    <li>Seleccionar empresa, trabajadora y mes.</li>
+    <li>Pulsar <strong>&laquo;Descargar PDF&raquo;</strong>. Se abre en nueva pesta&ntilde;a lista para imprimir o guardar.</li>
+  </ol>
+
+  <h2 class="seccion" id="sec10"><span class="num">10</span> Alertas &mdash; Trabajadoras sin fichar</h2>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;Alertas&raquo;</strong>. Lista de trabajadoras activas que <strong>no han fichado hoy</strong>.</p>
+  <ul>
+    <li>No aparecen las que est&aacute;n en IT, baja o vacaciones.</li>
+    <li>Pulsar &laquo;Actualizar&raquo; para refrescar.</li>
+    <li>&Uacute;til para detectar ausencias no comunicadas.</li>
+  </ul>
+
+  <h2 class="seccion" id="sec11"><span class="num">11</span> &iquest;C&oacute;mo ficha la trabajadora?</h2>
+  <p>Acceden desde su m&oacute;vil o cualquier navegador. Dos formas:</p>
+  <h3 class="sub">Opci&oacute;n A &mdash; Con DNI y PIN</h3>
+  <p>Entrar en la URL del panel e introducir DNI y PIN de 4 d&iacute;gitos.</p>
+  <h3 class="sub">Opci&oacute;n B &mdash; Con el c&oacute;digo QR (recomendado)</h3>
+  <p>Escanear el QR con la c&aacute;mara del m&oacute;vil, o pulsar el enlace enviado por WhatsApp. Inicia sesi&oacute;n autom&aacute;ticamente.</p>
+  <p>Una vez dentro, la trabajadora ve un &uacute;nico bot&oacute;n grande seg&uacute;n su estado:</p>
+  <ul>
+    <li><strong>FICHAR ENTRADA</strong> &rarr; inicia la jornada. Se muestra la hora de fin prevista.</li>
+    <li><strong>PAUSAR JORNADA</strong> &rarr; pausa el tiempo (el tiempo en pausa no cuenta como trabajado).</li>
+    <li><strong>REANUDAR JORNADA</strong> &rarr; reanuda tras la pausa.</li>
+    <li><strong>FINALIZAR JORNADA</strong> &rarr; cierra la jornada del d&iacute;a.</li>
+  </ul>
+  <div class="nota"><strong>NOTA:</strong> Cuando una trabajadora ha cumplido sus horas contratadas, el sistema cierra la jornada autom&aacute;ticamente aunque no pulse &laquo;Finalizar&raquo;. Ve el mensaje: <em>&laquo;Tu jornada laboral ha finalizado. No puedes seguir trabajando. &iexcl;Que descanses! Si tiene alguna duda, llame al 655 588 770.&raquo;</em></div>
+
+  <h2 class="seccion" id="sec12"><span class="num">12</span> Preguntas frecuentes</h2>
+  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora olvid&oacute; fichar la salida?</h3>
+  <p>Ir a <strong>&laquo;Fichajes&raquo;</strong>, localizar el registro, pulsar <strong>&laquo;Editar&raquo;</strong>, poner la hora de salida correcta, rellenar el motivo y guardar.</p>
+  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora est&aacute; de IT y no debe fichar?</h3>
+  <p>Ir a <strong>&laquo;Trabajadoras&raquo;</strong>, editar a la trabajadora y cambiar su situaci&oacute;n a <strong>&laquo;IT&raquo;</strong>. No aparecer&aacute; en alertas ni podr&aacute; fichar.</p>
+  <h3 class="sub">&iquest;Puedo ver el historial de un mes anterior?</h3>
+  <p>S&iacute;. En <strong>&laquo;Fichajes&raquo;</strong>, usar los filtros de fecha &laquo;Desde&raquo; y &laquo;Hasta&raquo;.</p>
+  <h3 class="sub">La trabajadora dice que su hora no es correcta, &iquest;qu&eacute; hago?</h3>
+  <p>El sistema muestra siempre hora de Madrid. Si hay discrepancia real, revisar el fichaje y corregirlo con motivo.</p>
+  <h3 class="sub">&iquest;C&oacute;mo s&eacute; si el sistema est&aacute; funcionando bien?</h3>
+  <p>En <strong>&laquo;Estado del d&iacute;a&raquo;</strong> deber&iacute;an verse las trabajadoras activas. Si no carga, verificar conexi&oacute;n a Internet. El sistema est&aacute; en Railway con disponibilidad 24/7.</p>
+  <h3 class="sub">&iquest;Puedo acceder desde el m&oacute;vil?</h3>
+  <p>S&iacute;, el panel admin funciona en m&oacute;vil aunque est&aacute; optimizado para ordenador.</p>
+
+  <div class="pie">
+    <p>Para consultas t&eacute;cnicas: <strong>ia@webgest.net</strong></p>
+    <p style="margin-top:6px;font-size:11px">Webgest &copy; 2026 &mdash; Control Horario v1.0</p>
+  </div>
+</div>
+</body>
+</html>
