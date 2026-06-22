@@ -16,87 +16,50 @@
     --blanco:  #FFFFFF;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--fondo);
-    min-height: 100vh;
-  }
-  /* Header */
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--fondo); min-height: 100vh; }
   .header {
-    background: var(--azul-osc);
-    color: #fff;
-    padding: 12px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: var(--azul-osc); color: #fff;
+    padding: 12px 24px; display: flex;
+    justify-content: space-between; align-items: center;
     position: sticky; top: 0; z-index: 100;
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   }
   .header h1 { font-size: 1.1rem; }
   .header-right { display: flex; gap: 10px; align-items: center; }
-  .btn-sm {
-    padding: 6px 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
+  .btn-sm { padding: 6px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
   .btn-primary { background: var(--azul); color: #fff; }
   .btn-danger  { background: var(--rojo); color: #fff; }
   .btn-success { background: var(--verde); color: #fff; }
   .btn-gray    { background: #90A4AE; color: #fff; }
+  .btn-orange  { background: var(--naranja); color: #fff; }
   .btn-outline { background: none; border: 2px solid var(--azul); color: var(--azul); }
+  .btn-outline-red { background: none; border: 2px solid var(--rojo); color: var(--rojo); }
   button:hover { opacity: 0.88; }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Layout */
   .layout { display: flex; min-height: calc(100vh - 50px); }
-  .sidebar {
-    width: 220px; min-width: 220px;
-    background: #1E2A3A;
-    padding: 20px 0;
-  }
+  .sidebar { width: 220px; min-width: 220px; background: #1E2A3A; padding: 20px 0; }
   .sidebar a {
-    display: block;
-    color: #B0BEC5;
-    padding: 12px 20px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background 0.15s, color 0.15s;
-    cursor: pointer;
+    display: block; color: #B0BEC5; padding: 12px 20px;
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    transition: background 0.15s, color 0.15s; cursor: pointer;
   }
-  .sidebar a:hover, .sidebar a.active {
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-  }
+  .sidebar a:hover, .sidebar a.active { background: rgba(255,255,255,0.1); color: #fff; }
   .sidebar .sep {
-    color: #607D8B;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 14px 20px 6px;
-    font-weight: 700;
+    color: #607D8B; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 14px 20px 6px; font-weight: 700;
   }
   .main { flex: 1; padding: 24px; overflow-x: auto; }
-
-  /* Secciones */
   .seccion { display: none; }
   .seccion.activa { display: block; }
 
-  /* Cards */
   .card {
-    background: var(--blanco);
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
+    background: var(--blanco); border-radius: 12px;
+    padding: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.08); margin-bottom: 20px;
   }
   .card h2 { font-size: 1.1rem; color: var(--azul-osc); margin-bottom: 16px; }
   .card h3 { font-size: 0.95rem; color: var(--gris); margin-bottom: 12px; }
 
-  /* Login */
   #seccionLogin {
     display: flex; align-items: center; justify-content: center;
     min-height: 100vh; background: var(--fondo);
@@ -112,16 +75,11 @@
   .form-group input, .form-group select, .form-group textarea {
     width: 100%; padding: 10px 12px;
     border: 2px solid #CFD8DC; border-radius: 8px;
-    font-size: 0.95rem; outline: none;
-    transition: border-color 0.2s;
-    font-family: inherit;
+    font-size: 0.95rem; outline: none; transition: border-color 0.2s; font-family: inherit;
   }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--azul);
-  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--azul); }
   .form-group textarea { resize: vertical; min-height: 70px; }
 
-  /* Tabla */
   .tabla-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   th {
@@ -133,10 +91,8 @@
   td { padding: 10px 12px; border-bottom: 1px solid #ECEFF1; vertical-align: middle; }
   tr:hover td { background: #F8FAFB; }
 
-  /* Estado badges */
   .badge {
-    display: inline-block;
-    padding: 3px 10px; border-radius: 20px;
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
     font-size: 0.75rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.04em;
   }
@@ -147,81 +103,68 @@
   .badge.it          { background: #F3E5F5; color: #7B1FA2; }
   .badge.baja        { background: #EFEBE9; color: #4E342E; }
   .badge.vacaciones  { background: #E0F7FA; color: #00695C; }
+  .badge.activa      { background: #E8F5E9; color: var(--verde); }
 
-  /* Filtros */
-  .filtros {
-    display: flex; flex-wrap: wrap; gap: 12px;
-    align-items: flex-end; margin-bottom: 16px;
-  }
+  .filtros { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 16px; }
   .filtros .form-group { margin-bottom: 0; min-width: 160px; }
-  .filtros .form-group label { margin-bottom: 4px; }
 
-  /* Modal */
   .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: none; align-items: center; justify-content: center;
-    z-index: 200;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    display: none; align-items: center; justify-content: center; z-index: 200;
   }
   .modal-overlay.open { display: flex; }
   .modal {
     background: var(--blanco); border-radius: 14px;
-    padding: 28px; width: 480px; max-width: 95vw;
+    padding: 28px; width: 520px; max-width: 95vw;
     max-height: 90vh; overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   }
   .modal h3 { margin-bottom: 20px; color: var(--azul-osc); }
   .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 
-  /* Alertas */
-  .alerta {
-    background: #FFEBEE;
-    border-left: 4px solid var(--rojo);
-    padding: 10px 14px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    margin-bottom: 8px;
-    color: #B71C1C;
-  }
-
-  /* Error/success msg */
+  .alerta { background: #FFEBEE; border-left: 4px solid var(--rojo); padding: 10px 14px; border-radius: 4px; font-size: 0.85rem; margin-bottom: 8px; color: #B71C1C; }
   .msg { padding: 10px 14px; border-radius: 8px; font-size: 0.88rem; margin-bottom: 12px; }
   .msg.error   { background: #FFEBEE; color: var(--rojo); }
   .msg.success { background: #E8F5E9; color: var(--verde); }
 
+  /* Tablón en admin */
+  .tablon-admin-item {
+    background: #F8FBFF; border: 1px solid #E3EEF9;
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+  }
+  .tablon-admin-titulo { font-weight: 700; color: var(--azul-osc); margin-bottom: 4px; }
+  .tablon-admin-contenido { font-size: 0.88rem; color: #37474F; white-space: pre-wrap; }
+  .tablon-admin-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .tablon-admin-fecha { font-size: 0.75rem; color: #90A4AE; }
+  .tablon-admin-actions { display: flex; gap: 6px; }
+
+  /* Carnet QR modal */
+  #carnetQRImg { border: 4px solid var(--azul); border-radius: 8px; }
+
   .hidden { display: none !important; }
   .spinner {
-    width: 28px; height: 28px;
-    border: 3px solid #E0E0E0;
-    border-top-color: var(--azul);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    margin: 30px auto;
+    width: 28px; height: 28px; border: 3px solid #E0E0E0; border-top-color: var(--azul);
+    border-radius: 50%; animation: spin 0.7s linear infinite; margin: 30px auto;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  .btn-actions-group { display: flex; flex-wrap: wrap; gap: 4px; }
 </style>
 </head>
 <body>
 
-<!-- ── LOGIN ADMIN ─────────────────────────────────────── -->
+<!-- LOGIN ADMIN -->
 <div id="seccionLogin">
   <div class="login-card">
     <h2>🔐 Administración Webgest</h2>
     <div class="msg error hidden" id="loginError"></div>
-    <div class="form-group">
-      <label>Usuario</label>
-      <input type="text" id="aUser" autocomplete="username">
-    </div>
-    <div class="form-group">
-      <label>Contraseña</label>
-      <input type="password" id="aPass" autocomplete="current-password">
-    </div>
-    <button class="btn-sm btn-primary" style="width:100%;padding:12px;font-size:1rem;margin-top:4px"
-            onclick="doAdminLogin()">ENTRAR</button>
+    <div class="form-group"><label>Usuario</label><input type="text" id="aUser" autocomplete="username"></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" id="aPass" autocomplete="current-password"></div>
+    <button class="btn-sm btn-primary" style="width:100%;padding:12px;font-size:1rem;margin-top:4px" onclick="doAdminLogin()">ENTRAR</button>
   </div>
 </div>
 
-<!-- ── PANEL ADMIN ─────────────────────────────────────── -->
+<!-- PANEL ADMIN -->
 <div id="panelAdmin" class="hidden">
   <div class="header">
     <h1>⚙️ Control Horario — Panel Webgest</h1>
@@ -234,14 +177,16 @@
   <div class="layout">
     <nav class="sidebar">
       <div class="sep">Vista</div>
-      <a onclick="mostrarSeccion('estadoDia')" id="nav-estadoDia">📊 Estado del día</a>
-      <a onclick="mostrarSeccion('fichajes')"  id="nav-fichajes">📋 Fichajes</a>
+      <a onclick="mostrarSeccion('estadoDia')"    id="nav-estadoDia">📊 Estado del día</a>
+      <a onclick="mostrarSeccion('fichajes')"     id="nav-fichajes">📋 Fichajes</a>
+      <div class="sep">Comunicación</div>
+      <a onclick="mostrarSeccion('tablon')"       id="nav-tablon">📌 Tablón</a>
       <div class="sep">Gestión</div>
       <a onclick="mostrarSeccion('trabajadoras')" id="nav-trabajadoras">👥 Trabajadoras</a>
       <a onclick="mostrarSeccion('empresas')"     id="nav-empresas">🏢 Empresas</a>
       <div class="sep">Herramientas</div>
-      <a onclick="mostrarSeccion('exportar')" id="nav-exportar">📄 Exportar PDF</a>
-      <a onclick="mostrarSeccion('alertas')"  id="nav-alertas">🔔 Alertas</a>
+      <a onclick="mostrarSeccion('exportar')"     id="nav-exportar">📄 Exportar PDF</a>
+      <a onclick="mostrarSeccion('alertas')"      id="nav-alertas">🔔 Alertas</a>
     </nav>
 
     <main class="main">
@@ -262,16 +207,10 @@
           <div id="spinnerEstado" class="spinner"></div>
           <div class="tabla-wrap">
             <table id="tablaEstado">
-              <thead>
-                <tr>
-                  <th>Trabajadora</th>
-                  <th>DNI</th>
-                  <th>Empresa</th>
-                  <th>Estado</th>
-                  <th>Entrada</th>
-                  <th>Salida</th>
-                </tr>
-              </thead>
+              <thead><tr>
+                <th>Trabajadora</th><th>DNI</th><th>Empresa</th>
+                <th>Estado</th><th>Entrada</th><th>Salida</th><th>H/día</th>
+              </tr></thead>
               <tbody id="bodyEstado"></tbody>
             </table>
           </div>
@@ -283,46 +222,53 @@
         <div class="card">
           <h2>Historial de fichajes</h2>
           <div class="filtros">
-            <div class="form-group">
-              <label>Empresa</label>
-              <select id="filtroEmpresaFichajes" onchange="cargarFichajes()">
-                <option value="">Todas</option>
-              </select>
+            <div class="form-group"><label>Empresa</label>
+              <select id="filtroEmpresaFichajes" onchange="cargarFichajes()"><option value="">Todas</option></select>
             </div>
-            <div class="form-group">
-              <label>Trabajadora</label>
-              <select id="filtroTrabFichajes" onchange="cargarFichajes()">
-                <option value="">Todas</option>
-              </select>
+            <div class="form-group"><label>Trabajadora</label>
+              <select id="filtroTrabFichajes" onchange="cargarFichajes()"><option value="">Todas</option></select>
             </div>
-            <div class="form-group">
-              <label>Desde</label>
-              <input type="date" id="filtroDesde" onchange="cargarFichajes()">
-            </div>
-            <div class="form-group">
-              <label>Hasta</label>
-              <input type="date" id="filtroHasta" onchange="cargarFichajes()">
-            </div>
+            <div class="form-group"><label>Desde</label><input type="date" id="filtroDesde" onchange="cargarFichajes()"></div>
+            <div class="form-group"><label>Hasta</label><input type="date" id="filtroHasta" onchange="cargarFichajes()"></div>
             <button class="btn-sm btn-primary" onclick="cargarFichajes()">🔍 Buscar</button>
           </div>
           <div id="spinnerFichajes" class="spinner hidden"></div>
           <div class="tabla-wrap">
-            <table id="tablaFichajes">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Trabajadora</th>
-                  <th>Empresa</th>
-                  <th>Entrada</th>
-                  <th>Salida</th>
-                  <th>Horas</th>
-                  <th>Auto</th>
-                  <th>Obs.</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
+            <table>
+              <thead><tr>
+                <th>Fecha</th><th>Trabajadora</th><th>Empresa</th>
+                <th>Entrada</th><th>Salida</th><th>Horas</th><th>Auto</th><th>Obs.</th><th>Acción</th>
+              </tr></thead>
               <tbody id="bodyFichajes"></tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLÓN -->
+      <div id="sec-tablon" class="seccion">
+        <div class="card">
+          <h2>📌 Tablón de Comunicaciones</h2>
+          <p style="color:var(--gris);font-size:0.85rem;margin-bottom:20px">
+            Publica información para cada trabajadora. Solo puede leerla, no responder.
+            Úsalo para comunicar centros asignados, horarios, instrucciones, etc.
+          </p>
+          <div class="filtros">
+            <div class="form-group">
+              <label>Empresa</label>
+              <select id="tablonEmpresa" onchange="cargarTrabsTablon()"><option value="">Todas</option></select>
+            </div>
+            <div class="form-group">
+              <label>Trabajadora</label>
+              <select id="tablonTrabajadora" onchange="cargarMensajesTablon()"><option value="">— Selecciona —</option></select>
+            </div>
+          </div>
+          <div id="tablonPanel" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <h3 id="tablonNombreTrab" style="margin:0;color:var(--azul-osc)"></h3>
+              <button class="btn-sm btn-success" onclick="abrirModalNuevoMensaje()">+ Nuevo mensaje</button>
+            </div>
+            <div id="listaMensajes"></div>
           </div>
         </div>
       </div>
@@ -337,24 +283,15 @@
           <div class="filtros">
             <div class="form-group">
               <label>Empresa</label>
-              <select id="filtroEmpresaTrab" onchange="cargarTrabajadoras()">
-                <option value="">Todas</option>
-              </select>
+              <select id="filtroEmpresaTrab" onchange="cargarTrabajadoras()"><option value="">Todas</option></select>
             </div>
           </div>
           <div class="tabla-wrap">
             <table>
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>DNI</th>
-                  <th>Empresa</th>
-                  <th>Horas/día</th>
-                  <th>Días/mes</th>
-                  <th>Situación</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
+              <thead><tr>
+                <th>Nombre</th><th>DNI</th><th>Empresa</th>
+                <th>H/día</th><th>Días/mes</th><th>Tel.</th><th>Situación</th><th>Acciones</th>
+              </tr></thead>
               <tbody id="bodyTrab"></tbody>
             </table>
           </div>
@@ -370,9 +307,7 @@
           </div>
           <div class="tabla-wrap">
             <table>
-              <thead>
-                <tr><th>Nombre</th><th>NIF/CIF</th><th>CCC</th><th>Acciones</th></tr>
-              </thead>
+              <thead><tr><th>Nombre</th><th>NIF/CIF</th><th>CCC</th><th>Estado</th><th>Acciones</th></tr></thead>
               <tbody id="bodyEmpresas"></tbody>
             </table>
           </div>
@@ -383,28 +318,15 @@
       <div id="sec-exportar" class="seccion">
         <div class="card">
           <h2>Exportar Registro de Jornada (PDF)</h2>
-          <p style="color:var(--gris);font-size:0.88rem;margin-bottom:20px">
-            Formato RD-ley 8/2019 — Art. 34.9 ET
-          </p>
-          <div class="form-group">
-            <label>Empresa</label>
-            <select id="pdfEmpresa" onchange="cargarTrabPDF()">
-              <option value="">Selecciona empresa…</option>
-            </select>
+          <p style="color:var(--gris);font-size:0.88rem;margin-bottom:20px">Formato RD-ley 8/2019 — Art. 34.9 ET</p>
+          <div class="form-group"><label>Empresa</label>
+            <select id="pdfEmpresa" onchange="cargarTrabPDF()"><option value="">Selecciona empresa…</option></select>
           </div>
-          <div class="form-group">
-            <label>Trabajadora</label>
-            <select id="pdfTrab">
-              <option value="">Selecciona trabajadora…</option>
-            </select>
+          <div class="form-group"><label>Trabajadora</label>
+            <select id="pdfTrab"><option value="">Selecciona trabajadora…</option></select>
           </div>
-          <div class="form-group">
-            <label>Mes (YYYY-MM)</label>
-            <input type="month" id="pdfMes">
-          </div>
-          <button class="btn-sm btn-primary" onclick="exportarPDF()" style="padding:12px 24px;font-size:1rem">
-            📥 Descargar PDF
-          </button>
+          <div class="form-group"><label>Mes</label><input type="month" id="pdfMes"></div>
+          <button class="btn-sm btn-primary" onclick="exportarPDF()" style="padding:12px 24px;font-size:1rem">📥 Descargar PDF</button>
         </div>
       </div>
 
@@ -413,40 +335,40 @@
         <div class="card">
           <h2>Alertas — Trabajadoras sin fichar hoy</h2>
           <p style="color:var(--gris);font-size:0.85rem;margin-bottom:16px">
-            Trabajadoras activas que no han fichado entrada hoy (excluye IT, baja, vacaciones).
+            Trabajadoras activas que no han fichado hoy (excluye IT, baja, vacaciones).
           </p>
-          <button class="btn-sm btn-primary" onclick="cargarAlertas()" style="margin-bottom:16px">
-            🔄 Actualizar
-          </button>
+          <button class="btn-sm btn-primary" onclick="cargarAlertas()" style="margin-bottom:16px">🔄 Actualizar</button>
           <div id="listaAlertas"></div>
         </div>
       </div>
 
     </main>
   </div>
-</div><!-- /panelAdmin -->
+</div>
 
-<!-- ── MODAL EDITAR FICHAJE ───────────────────────────── -->
+<!-- ── MODAL EDITAR FICHAJE ─────────────────────────────── -->
 <div class="modal-overlay" id="modalFichaje">
   <div class="modal">
     <h3>✏️ Editar fichaje</h3>
     <div class="msg error hidden" id="modalFichajeError"></div>
     <input type="hidden" id="mfId">
-    <div class="form-group">
-      <label>Hora entrada (UTC: HH:MM)</label>
-      <input type="text" id="mfEntrada" placeholder="HH:MM">
+    <p style="font-size:0.82rem;color:var(--gris);margin-bottom:14px">
+      ⚠️ Introduce las horas en <strong>hora Madrid</strong>. El sistema las convierte automáticamente.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="form-group">
+        <label>Hora entrada (Madrid)</label>
+        <input type="time" id="mfEntrada">
+      </div>
+      <div class="form-group">
+        <label>Hora salida (Madrid)</label>
+        <input type="time" id="mfSalida">
+      </div>
     </div>
+    <div class="form-group"><label>Observaciones</label><textarea id="mfObs"></textarea></div>
     <div class="form-group">
-      <label>Hora salida (UTC: HH:MM)</label>
-      <input type="text" id="mfSalida" placeholder="HH:MM">
-    </div>
-    <div class="form-group">
-      <label>Observaciones</label>
-      <textarea id="mfObs"></textarea>
-    </div>
-    <div class="form-group">
-      <label>⚠️ Motivo de la modificación (obligatorio)</label>
-      <textarea id="mfMotivo" placeholder="Ej: Error de fichaje, IT declarada, etc."></textarea>
+      <label>⚠️ Motivo de modificación (obligatorio)</label>
+      <textarea id="mfMotivo" placeholder="Ej: Error de fichaje, olvido salida, etc."></textarea>
     </div>
     <div class="modal-actions">
       <button class="btn-sm btn-gray" onclick="cerrarModal('modalFichaje')">Cancelar</button>
@@ -455,52 +377,29 @@
   </div>
 </div>
 
-<!-- ── MODAL NUEVA/EDITAR TRABAJADORA ─────────────────── -->
+<!-- ── MODAL NUEVA/EDITAR TRABAJADORA ──────────────────── -->
 <div class="modal-overlay" id="modalTrab">
   <div class="modal">
     <h3 id="modalTrabTitulo">Nueva trabajadora</h3>
     <div class="msg error hidden" id="modalTrabError"></div>
     <input type="hidden" id="mtId">
-    <div class="form-group">
-      <label>Empresa</label>
-      <select id="mtEmpresa"></select>
-    </div>
-    <div class="form-group">
-      <label>Apellidos</label>
-      <input type="text" id="mtApellidos">
-    </div>
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" id="mtNombre">
-    </div>
-    <div class="form-group">
-      <label>DNI</label>
-      <input type="text" id="mtDNI" placeholder="12345678A" autocapitalize="characters">
-    </div>
-    <div class="form-group">
-      <label>PIN (4 dígitos) — dejar vacío para no cambiar</label>
-      <input type="text" id="mtPIN" placeholder="0000" maxlength="4" inputmode="numeric">
-    </div>
-    <div class="form-group">
-      <label>Horas/día</label>
-      <input type="number" id="mtHoras" step="0.01" min="0" value="8.3">
-    </div>
-    <div class="form-group">
-      <label>Días/mes</label>
-      <input type="number" id="mtDias" min="1" max="31" value="30">
-    </div>
-    <div class="form-group">
-      <label>Teléfono (SMS)</label>
-      <input type="tel" id="mtTel" placeholder="600123456">
-    </div>
-    <div class="form-group">
-      <label>Situación</label>
-      <select id="mtSituacion">
-        <option value="activa">Activa</option>
-        <option value="it">IT (Incapacidad Temporal)</option>
-        <option value="baja">Baja</option>
-        <option value="vacaciones">Vacaciones</option>
-      </select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="form-group" style="grid-column:1/-1"><label>Empresa</label><select id="mtEmpresa"></select></div>
+      <div class="form-group"><label>Apellidos</label><input type="text" id="mtApellidos"></div>
+      <div class="form-group"><label>Nombre</label><input type="text" id="mtNombre"></div>
+      <div class="form-group"><label>DNI</label><input type="text" id="mtDNI" placeholder="12345678A" autocapitalize="characters"></div>
+      <div class="form-group"><label>PIN (vacío = no cambiar)</label><input type="text" id="mtPIN" placeholder="0000" maxlength="4" inputmode="numeric"></div>
+      <div class="form-group"><label>Horas/día</label><input type="number" id="mtHoras" step="0.01" min="0" value="8.0"></div>
+      <div class="form-group"><label>Días/mes</label><input type="number" id="mtDias" min="1" max="31" value="30"></div>
+      <div class="form-group"><label>Teléfono (SMS)</label><input type="tel" id="mtTel" placeholder="600123456"></div>
+      <div class="form-group"><label>Situación</label>
+        <select id="mtSituacion">
+          <option value="activa">Activa</option>
+          <option value="it">IT (Incapacidad Temporal)</option>
+          <option value="baja">Baja</option>
+          <option value="vacaciones">Vacaciones</option>
+        </select>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn-sm btn-gray" onclick="cerrarModal('modalTrab')">Cancelar</button>
@@ -509,24 +408,15 @@
   </div>
 </div>
 
-<!-- ── MODAL NUEVA EMPRESA ────────────────────────────── -->
+<!-- ── MODAL NUEVA/EDITAR EMPRESA ──────────────────────── -->
 <div class="modal-overlay" id="modalEmpresa">
   <div class="modal">
     <h3 id="modalEmpresaTitulo">Nueva empresa</h3>
     <div class="msg error hidden" id="modalEmpresaError"></div>
     <input type="hidden" id="meId">
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" id="meNombre">
-    </div>
-    <div class="form-group">
-      <label>NIF/CIF</label>
-      <input type="text" id="meNIF">
-    </div>
-    <div class="form-group">
-      <label>CCC</label>
-      <input type="text" id="meCCC">
-    </div>
+    <div class="form-group"><label>Nombre</label><input type="text" id="meNombre"></div>
+    <div class="form-group"><label>NIF/CIF</label><input type="text" id="meNIF"></div>
+    <div class="form-group"><label>CCC</label><input type="text" id="meCCC"></div>
     <div class="modal-actions">
       <button class="btn-sm btn-gray" onclick="cerrarModal('modalEmpresa')">Cancelar</button>
       <button class="btn-sm btn-success" onclick="guardarEmpresa()">Guardar</button>
@@ -534,23 +424,66 @@
   </div>
 </div>
 
+<!-- ── MODAL CARNET / QR ────────────────────────────────── -->
+<div class="modal-overlay" id="modalCarnet">
+  <div class="modal" style="text-align:center;max-width:400px">
+    <h3 id="carnetNombre" style="margin-bottom:4px"></h3>
+    <p id="carnetDNI" style="color:var(--gris);font-size:0.85rem;margin-bottom:16px"></p>
+    <div style="display:flex;justify-content:center;margin-bottom:12px">
+      <img id="carnetQRImg" src="" alt="QR Carnet" style="width:200px;height:200px;border:4px solid var(--azul);border-radius:8px">
+    </div>
+    <p style="font-size:0.78rem;color:var(--gris);margin-bottom:6px">URL de acceso directo:</p>
+    <input type="text" id="carnetURLInput" readonly
+           style="width:100%;padding:8px;font-size:0.72rem;border:1px solid #ccc;border-radius:6px;margin-bottom:16px;text-align:center">
+    <div class="modal-actions" style="justify-content:center;flex-wrap:wrap">
+      <button class="btn-sm btn-primary" onclick="copiarCarnetURL()">📋 Copiar URL</button>
+      <button class="btn-sm btn-orange" onclick="regenerarCarnet()">🔄 Regenerar</button>
+      <button class="btn-sm btn-gray" onclick="cerrarModal('modalCarnet')">Cerrar</button>
+    </div>
+    <p style="font-size:0.72rem;color:#90A4AE;margin-top:12px">
+      Imprima este QR para entregarlo a la trabajadora.<br>Si se pierde, use "Regenerar" para invalidar el código anterior.
+    </p>
+  </div>
+</div>
+
+<!-- ── MODAL TABLÓN MENSAJE ────────────────────────────── -->
+<div class="modal-overlay" id="modalMensaje">
+  <div class="modal">
+    <h3 id="modalMensajeTitulo">Nuevo mensaje en el Tablón</h3>
+    <div class="msg error hidden" id="modalMensajeError"></div>
+    <input type="hidden" id="mmId">
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" id="mmTitulo" placeholder="Ej: Centros de trabajo, Horario, Instrucciones…">
+    </div>
+    <div class="form-group">
+      <label>Contenido</label>
+      <textarea id="mmContenido" style="min-height:140px"
+                placeholder="Información que verá la trabajadora en su panel (solo lectura)…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-gray" onclick="cerrarModal('modalMensaje')">Cancelar</button>
+      <button class="btn-sm btn-success" onclick="guardarMensaje()">Publicar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── Estado global ──────────────────────────────────────────
-let ATOKEN = localStorage.getItem('ch_admin_token') || null;
+let ATOKEN   = localStorage.getItem('ch_admin_token') || null;
 let empresas = [];
+let _carnetTrabId = null;
+let _tablonTrabId = null;
+let _tablonTrabNombre = '';
 
 // ── Arranque ───────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', async () => {
-  if (ATOKEN) {
-    mostrarPanel();
-  }
-  // Fecha
   $('fechaHoy').textContent = new Date().toLocaleDateString('es-ES', {
     weekday:'long', day:'numeric', month:'long', year:'numeric'
   });
+  if (ATOKEN) mostrarPanel();
 });
 
-// ── Login ──────────────────────────────────────────────────
 async function doAdminLogin() {
   const usuario  = $('aUser').value.trim();
   const password = $('aPass').value;
@@ -587,17 +520,19 @@ function mostrarSeccion(id) {
   document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
   $(`sec-${id}`).classList.add('activa');
-  $(`nav-${id}`).classList.add('active');
+  const nav = $(`nav-${id}`);
+  if (nav) nav.classList.add('active');
 
-  const acciones = {
+  const acc = {
     estadoDia:    cargarEstadoDia,
     fichajes:     cargarFichajes,
     trabajadoras: cargarTrabajadoras,
     empresas:     cargarEmpresasTabla,
+    tablon:       () => cargarTrabsTablon(),
     exportar:     () => {},
     alertas:      cargarAlertas
   };
-  if (acciones[id]) acciones[id]();
+  if (acc[id]) acc[id]();
 }
 
 // ── Empresas ───────────────────────────────────────────────
@@ -608,34 +543,45 @@ async function cargarEmpresas() {
 function rellenarSelectEmpresas() {
   const selects = [
     'filtroEmpresaEstado','filtroEmpresaFichajes','filtroEmpresaTrab',
-    'pdfEmpresa','mtEmpresa','filtroEmpresaFichajes'
+    'pdfEmpresa','mtEmpresa','tablonEmpresa'
   ];
   for (const id of selects) {
     const el = $(id);
     if (!el) continue;
-    const primero = el.children[0].outerHTML; // conservar opción vacía
+    const primero = el.children[0].outerHTML;
     el.innerHTML = primero;
     empresas.forEach(e => {
       const opt = document.createElement('option');
-      opt.value = e.id;
-      opt.textContent = e.nombre;
+      opt.value = e.id; opt.textContent = e.nombre;
       el.appendChild(opt);
     });
   }
 }
 
 async function cargarEmpresasTabla() {
-  const rows = await api('/api/admin/empresas');
+  const rows = await api('/api/admin/empresas?todas=1');
   $('bodyEmpresas').innerHTML = rows.map(e => `
     <tr>
       <td><strong>${e.nombre}</strong></td>
       <td>${e.nif||'—'}</td>
       <td>${e.ccc||'—'}</td>
+      <td><span class="badge ${e.activa ? 'activa' : 'baja'}">${e.activa ? 'Activa' : 'Baja'}</span></td>
       <td>
-        <button class="btn-sm btn-outline" style="font-size:0.78rem"
-                onclick="abrirModalEditarEmpresa(${e.id},'${esc(e.nombre)}','${esc(e.nif||'')}','${esc(e.ccc||'')}')">
-          Editar
-        </button>
+        <div class="btn-actions-group">
+          <button class="btn-sm btn-outline" style="font-size:0.78rem"
+                  onclick="abrirModalEditarEmpresa(${e.id},'${esc(e.nombre)}','${esc(e.nif||'')}','${esc(e.ccc||'')}',${e.activa})">
+            Editar
+          </button>
+          ${e.activa ? `
+          <button class="btn-sm btn-outline-red" style="font-size:0.78rem"
+                  onclick="darDeBajaEmpresa(${e.id},'${esc(e.nombre)}')">
+            Dar de baja
+          </button>` : `
+          <button class="btn-sm btn-success" style="font-size:0.78rem"
+                  onclick="reactivarEmpresa(${e.id})">
+            Reactivar
+          </button>`}
+        </div>
       </td>
     </tr>
   `).join('');
@@ -643,47 +589,51 @@ async function cargarEmpresasTabla() {
 
 function abrirModalNuevaEmpresa() {
   $('modalEmpresaTitulo').textContent = 'Nueva empresa';
-  $('meId').value = '';
-  $('meNombre').value = '';
-  $('meNIF').value = '';
-  $('meCCC').value = '';
+  $('meId').value = ''; $('meNombre').value = '';
+  $('meNIF').value = ''; $('meCCC').value = '';
   hide('modalEmpresaError');
   abrirModal('modalEmpresa');
 }
-function abrirModalEditarEmpresa(id,nombre,nif,ccc) {
+function abrirModalEditarEmpresa(id,nombre,nif,ccc,activa) {
   $('modalEmpresaTitulo').textContent = 'Editar empresa';
-  $('meId').value = id;
-  $('meNombre').value = nombre;
-  $('meNIF').value = nif;
-  $('meCCC').value = ccc;
+  $('meId').value = id; $('meNombre').value = nombre;
+  $('meNIF').value = nif; $('meCCC').value = ccc;
   abrirModal('modalEmpresa');
 }
 async function guardarEmpresa() {
-  const id     = $('meId').value;
+  const id = $('meId').value;
   const nombre = $('meNombre').value.trim();
-  const nif    = $('meNIF').value.trim();
-  const ccc    = $('meCCC').value.trim();
+  const nif = $('meNIF').value.trim();
+  const ccc = $('meCCC').value.trim();
   if (!nombre) return showMsg('modalEmpresaError','Nombre obligatorio','error');
   try {
-    if (id) {
-      await api(`/api/admin/empresas/${id}`, 'PUT', { nombre, nif, ccc, activa: 1 });
-    } else {
-      await api('/api/admin/empresas', 'POST', { nombre, nif, ccc });
-    }
+    if (id) await api(`/api/admin/empresas/${id}`, 'PUT', { nombre, nif, ccc, activa: 1 });
+    else    await api('/api/admin/empresas', 'POST', { nombre, nif, ccc });
     cerrarModal('modalEmpresa');
     await cargarEmpresas();
     rellenarSelectEmpresas();
     cargarEmpresasTabla();
-  } catch (e) {
-    showMsg('modalEmpresaError', e.message, 'error');
-  }
+  } catch (e) { showMsg('modalEmpresaError', e.message, 'error'); }
+}
+async function darDeBajaEmpresa(id, nombre) {
+  if (!confirm(`¿Dar de baja la empresa "${nombre}"? No aparecerá en los listados activos.`)) return;
+  await api(`/api/admin/empresas/${id}`, 'PUT', { activa: 0 });
+  await cargarEmpresas();
+  rellenarSelectEmpresas();
+  cargarEmpresasTabla();
+}
+async function reactivarEmpresa(id) {
+  await api(`/api/admin/empresas/${id}`, 'PUT', { activa: 1 });
+  await cargarEmpresas();
+  rellenarSelectEmpresas();
+  cargarEmpresasTabla();
 }
 
 // ── Estado del día ─────────────────────────────────────────
 async function cargarEstadoDia() {
   show('spinnerEstado');
-  const empresa_id = $('filtroEmpresaEstado').value;
   $('fechaEstado').textContent = new Date().toLocaleDateString('es-ES');
+  const empresa_id = $('filtroEmpresaEstado').value;
   try {
     const params = empresa_id ? `?empresa_id=${empresa_id}` : '';
     const rows = await api(`/api/admin/estado-dia${params}`);
@@ -695,11 +645,10 @@ async function cargarEstadoDia() {
         <td><span class="badge ${r.estado}">${estadoLabel(r.estado)}</span></td>
         <td>${r.hora_entrada_display || '—'}</td>
         <td>${r.hora_salida_display  || '—'}</td>
+        <td style="font-size:0.82rem">${r.horas_dia}h</td>
       </tr>
     `).join('');
-  } finally {
-    hide('spinnerEstado');
-  }
+  } finally { hide('spinnerEstado'); }
 }
 
 // ── Fichajes ───────────────────────────────────────────────
@@ -721,25 +670,22 @@ async function cargarFichajes() {
         <td>${r.fecha}</td>
         <td>${r.trabajadora_nombre}</td>
         <td style="font-size:0.8rem">${r.empresa_nombre}</td>
-        <td>${r.hora_entrada_display||'—'}</td>
-        <td>${r.hora_salida_display||'—'}</td>
+        <td><strong>${r.hora_entrada_display||'—'}</strong></td>
+        <td><strong>${r.hora_salida_display||'—'}</strong></td>
         <td>${r.horas_trabajadas!=null ? r.horas_trabajadas.toFixed(2)+'h' : '—'}</td>
-        <td>${r.completado_auto ? '⚡Auto' : ''}</td>
-        <td style="max-width:120px;font-size:0.8rem">${r.observaciones||''}</td>
+        <td>${r.completado_auto ? '⚡' : ''}</td>
+        <td style="max-width:100px;font-size:0.8rem">${r.observaciones||''}</td>
         <td>
           <button class="btn-sm btn-outline" style="font-size:0.78rem"
-                  onclick="abrirModalFichaje(${r.id},'${r.hora_entrada||''}','${r.hora_salida||''}','${esc(r.observaciones||'')}')">
+                  onclick="abrirModalFichaje(${r.id},'${r.fecha}','${r.hora_entrada_display||''}','${r.hora_salida_display||''}','${esc(r.observaciones||'')}')">
             ✏️ Editar
           </button>
         </td>
       </tr>
     `).join('');
-  } finally {
-    hide('spinnerFichajes');
-  }
+  } finally { hide('spinnerFichajes'); }
 }
 
-// Actualizar select trabajadoras cuando cambia empresa en filtro fichajes
 $('filtroEmpresaFichajes').addEventListener('change', async function() {
   const eid = this.value;
   const sel = $('filtroTrabFichajes');
@@ -754,49 +700,41 @@ $('filtroEmpresaFichajes').addEventListener('change', async function() {
   });
 });
 
-function abrirModalFichaje(id, entrada, salida, obs) {
+function abrirModalFichaje(id, fecha, entradaDisplay, salidaDisplay, obs) {
   $('mfId').value = id;
-  // Mostrar horas UTC (el admin trabaja con UTC ya que la DB almacena UTC)
-  $('mfEntrada').value = entrada ? entrada.slice(11,16) : '';
-  $('mfSalida').value  = salida  ? salida.slice(11,16)  : '';
+  $('mfId').dataset.fecha = fecha;
+  $('mfEntrada').value = entradaDisplay && entradaDisplay !== '—' ? entradaDisplay : '';
+  $('mfSalida').value  = salidaDisplay  && salidaDisplay  !== '—' ? salidaDisplay  : '';
   $('mfObs').value     = obs;
   $('mfMotivo').value  = '';
   hide('modalFichajeError');
-  // Guardar fecha para reconstruir el datetime completo
-  $('mfId').dataset.fecha = entrada ? entrada.slice(0,10) : '';
   abrirModal('modalFichaje');
 }
 
 async function guardarFichaje() {
   const id     = $('mfId').value;
-  const fecha  = $('mfId').dataset.fecha;
   const motivo = $('mfMotivo').value.trim();
   if (!motivo) return showMsg('modalFichajeError','El motivo es obligatorio','error');
-
   const entH = $('mfEntrada').value;
   const salH = $('mfSalida').value;
-
   const body = {
     motivo,
-    observaciones: $('mfObs').value
+    observaciones: $('mfObs').value,
+    madrid_time: true
   };
-  if (entH) body.hora_entrada = `${fecha} ${entH}:00`;
-  if (salH) body.hora_salida  = `${fecha} ${salH}:00`;
-
+  if (entH) body.hora_entrada = entH;
+  if (salH) body.hora_salida  = salH;
   try {
     await api(`/api/admin/fichajes/${id}`, 'PUT', body);
     cerrarModal('modalFichaje');
     cargarFichajes();
-  } catch (e) {
-    showMsg('modalFichajeError', e.message, 'error');
-  }
+  } catch (e) { showMsg('modalFichajeError', e.message, 'error'); }
 }
 
 // ── Trabajadoras ───────────────────────────────────────────
 async function cargarTrabajadoras() {
   const eid = $('filtroEmpresaTrab').value;
-  const params = eid ? `?empresa_id=${eid}` : '';
-  const rows = await api(`/api/admin/trabajadoras${params}`);
+  const rows = await api(`/api/admin/trabajadoras${eid ? '?empresa_id=' + eid : ''}`);
   $('bodyTrab').innerHTML = rows.map(r => `
     <tr>
       <td>
@@ -807,12 +745,27 @@ async function cargarTrabajadoras() {
       <td style="font-size:0.82rem">${r.empresa_nombre}</td>
       <td>${r.horas_dia}h</td>
       <td>${r.dias_mes}d</td>
+      <td style="font-size:0.82rem">${r.telefono||'—'}</td>
       <td><span class="badge ${r.situacion}">${r.situacion}</span></td>
       <td>
-        <button class="btn-sm btn-outline" style="font-size:0.78rem"
-                onclick="abrirModalEditarTrab(${r.id})">
-          Editar
-        </button>
+        <div class="btn-actions-group">
+          <button class="btn-sm btn-outline" style="font-size:0.78rem"
+                  onclick="abrirModalEditarTrab(${r.id})">✏️ Editar</button>
+          <button class="btn-sm btn-primary" style="font-size:0.78rem"
+                  onclick="mostrarCarnet(${r.id},'${esc(r.apellidos + ', ' + r.nombre)}','${r.dni}','${r.codigo_carnet||''}')">
+            📱 QR
+          </button>
+          <button class="btn-sm btn-gray" style="font-size:0.78rem"
+                  onclick="verPanelTrabajadora('${r.codigo_carnet||''}')">👁 Panel</button>
+          <button class="btn-sm btn-orange" style="font-size:0.78rem"
+                  onclick="irTablon(${r.id},'${esc(r.apellidos + ', ' + r.nombre)}')">📌 Tablón</button>
+          ${r.activa && r.situacion !== 'baja'
+            ? `<button class="btn-sm btn-outline-red" style="font-size:0.78rem"
+                       onclick="darDeBajaTrab(${r.id},'${esc(r.apellidos + ', ' + r.nombre)}')">
+                 Baja
+               </button>`
+            : ''}
+        </div>
       </td>
     </tr>
   `).join('');
@@ -826,7 +779,7 @@ function abrirModalNuevaTrab() {
   $('mtNombre').value = '';
   $('mtDNI').value = '';
   $('mtPIN').value = '';
-  $('mtHoras').value = '8.3';
+  $('mtHoras').value = '8.0';
   $('mtDias').value = '30';
   $('mtTel').value = '';
   $('mtSituacion').value = 'activa';
@@ -835,19 +788,17 @@ function abrirModalNuevaTrab() {
 }
 
 async function abrirModalEditarTrab(id) {
-  const rows = await api(`/api/admin/trabajadoras?empresa_id=`);
-  const t = rows.find(r => r.id === id);
-  if (!t) return;
+  const t = await api(`/api/admin/trabajadoras/${id}`);
   $('modalTrabTitulo').textContent = 'Editar trabajadora';
-  $('mtId').value = id;
-  $('mtEmpresa').value = t.empresa_id;
+  $('mtId').value       = t.id;
+  $('mtEmpresa').value  = t.empresa_id;
   $('mtApellidos').value = t.apellidos;
-  $('mtNombre').value = t.nombre;
-  $('mtDNI').value = t.dni;
-  $('mtPIN').value = '';
-  $('mtHoras').value = t.horas_dia;
-  $('mtDias').value = t.dias_mes;
-  $('mtTel').value = t.telefono || '';
+  $('mtNombre').value   = t.nombre;
+  $('mtDNI').value      = t.dni;
+  $('mtPIN').value      = '';
+  $('mtHoras').value    = t.horas_dia;
+  $('mtDias').value     = t.dias_mes;
+  $('mtTel').value      = t.telefono || '';
   $('mtSituacion').value = t.situacion;
   hide('modalTrabError');
   abrirModal('modalTrab');
@@ -856,30 +807,174 @@ async function abrirModalEditarTrab(id) {
 async function guardarTrab() {
   const id = $('mtId').value;
   const body = {
-    empresa_id:  parseInt($('mtEmpresa').value),
-    nombre:      $('mtNombre').value.trim(),
-    apellidos:   $('mtApellidos').value.trim(),
-    dni:         $('mtDNI').value.trim().toUpperCase(),
-    horas_dia:   parseFloat($('mtHoras').value),
-    dias_mes:    parseInt($('mtDias').value),
-    telefono:    $('mtTel').value.trim() || null,
-    situacion:   $('mtSituacion').value
+    empresa_id: parseInt($('mtEmpresa').value),
+    nombre:     $('mtNombre').value.trim(),
+    apellidos:  $('mtApellidos').value.trim(),
+    dni:        $('mtDNI').value.trim().toUpperCase(),
+    horas_dia:  parseFloat($('mtHoras').value),
+    dias_mes:   parseInt($('mtDias').value),
+    telefono:   $('mtTel').value.trim() || null,
+    situacion:  $('mtSituacion').value
   };
   const pin = $('mtPIN').value.trim();
   if (pin) body.pin = pin;
   if (!id && !pin) return showMsg('modalTrabError','El PIN es obligatorio para nueva trabajadora','error');
-
   try {
-    if (id) {
-      await api(`/api/admin/trabajadoras/${id}`, 'PUT', body);
-    } else {
-      await api('/api/admin/trabajadoras', 'POST', body);
-    }
+    if (id) await api(`/api/admin/trabajadoras/${id}`, 'PUT', body);
+    else    await api('/api/admin/trabajadoras', 'POST', body);
     cerrarModal('modalTrab');
     cargarTrabajadoras();
-  } catch (e) {
-    showMsg('modalTrabError', e.message, 'error');
+  } catch (e) { showMsg('modalTrabError', e.message, 'error'); }
+}
+
+async function darDeBajaTrab(id, nombre) {
+  if (!confirm(`¿Dar de baja a ${nombre}?\nSe marcará como "Baja" y no podrá fichar.`)) return;
+  await api(`/api/admin/trabajadoras/${id}`, 'PUT', { situacion: 'baja', activa: 0, motivo: 'Baja laboral' });
+  cargarTrabajadoras();
+}
+
+// ── QR / Carnet ────────────────────────────────────────────
+function mostrarCarnet(id, nombre, dni, carnet) {
+  _carnetTrabId = id;
+  $('carnetNombre').textContent = nombre;
+  $('carnetDNI').textContent = `DNI: ${dni}`;
+  const url = `${location.origin}/?carnet=${carnet}`;
+  $('carnetURLInput').value = url;
+  $('carnetQRImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+  abrirModal('modalCarnet');
+}
+
+function copiarCarnetURL() {
+  navigator.clipboard.writeText($('carnetURLInput').value)
+    .then(() => alert('URL copiada al portapapeles ✓'))
+    .catch(() => { $('carnetURLInput').select(); document.execCommand('copy'); });
+}
+
+async function regenerarCarnet() {
+  if (!confirm('¿Regenerar el código QR?\nEl código anterior quedará invalidado.')) return;
+  const r = await api(`/api/admin/trabajadoras/${_carnetTrabId}/regenerar-carnet`, 'POST', {});
+  const url = `${location.origin}/?carnet=${r.codigo_carnet}`;
+  $('carnetURLInput').value = url;
+  $('carnetQRImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+  cargarTrabajadoras();
+}
+
+function verPanelTrabajadora(carnet) {
+  if (!carnet) return alert('Esta trabajadora no tiene código carnet asignado');
+  window.open(`/?carnet=${carnet}`, '_blank');
+}
+
+// ── Tablón admin ───────────────────────────────────────────
+async function cargarTrabsTablon() {
+  const eid = $('tablonEmpresa').value;
+  const sel = $('tablonTrabajadora');
+  sel.innerHTML = '<option value="">— Selecciona —</option>';
+  hide('tablonPanel');
+
+  const params = eid ? `?empresa_id=${eid}` : '';
+  const trabs = await api(`/api/admin/trabajadoras${params}`);
+  trabs.filter(t => !t.es_prueba).forEach(t => {
+    const o = document.createElement('option');
+    o.value = t.id;
+    o.textContent = `${t.apellidos}, ${t.nombre} (${t.empresa_nombre})`;
+    sel.appendChild(o);
+  });
+}
+
+async function cargarMensajesTablon() {
+  const tid = $('tablonTrabajadora').value;
+  if (!tid) { hide('tablonPanel'); return; }
+
+  _tablonTrabId = tid;
+  const opt = $('tablonTrabajadora').options[$('tablonTrabajadora').selectedIndex];
+  _tablonTrabNombre = opt.textContent;
+  $('tablonNombreTrab').textContent = _tablonTrabNombre;
+  show('tablonPanel');
+
+  const mensajes = await api(`/api/admin/tablon/${tid}`);
+  const div = $('listaMensajes');
+  if (!mensajes.length) {
+    div.innerHTML = '<p style="color:#90A4AE;font-size:0.88rem">Sin mensajes publicados.</p>';
+    return;
   }
+  div.innerHTML = mensajes.map(m => `
+    <div class="tablon-admin-item">
+      <div class="tablon-admin-titulo">📌 ${escHtml(m.titulo)}</div>
+      <div class="tablon-admin-contenido">${escHtml(m.contenido)}</div>
+      <div class="tablon-admin-footer">
+        <span class="tablon-admin-fecha">${m.fecha_creacion.slice(0,16)}</span>
+        <div class="tablon-admin-actions">
+          <button class="btn-sm btn-outline" style="font-size:0.78rem"
+                  onclick="editarMensaje(${m.id},'${escJs(m.titulo)}','${escJs(m.contenido)}')">
+            ✏️ Editar
+          </button>
+          <button class="btn-sm btn-outline-red" style="font-size:0.78rem"
+                  onclick="eliminarMensaje(${m.id})">
+            🗑 Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function irTablon(id, nombre) {
+  mostrarSeccion('tablon');
+  setTimeout(async () => {
+    const sel = $('tablonTrabajadora');
+    let found = false;
+    for (const opt of sel.options) {
+      if (parseInt(opt.value) === id) { sel.value = id; found = true; break; }
+    }
+    if (!found) {
+      $('tablonEmpresa').value = '';
+      await cargarTrabsTablon();
+      for (const opt of $('tablonTrabajadora').options) {
+        if (parseInt(opt.value) === id) { $('tablonTrabajadora').value = id; break; }
+      }
+    }
+    await cargarMensajesTablon();
+  }, 100);
+}
+
+function abrirModalNuevoMensaje() {
+  $('modalMensajeTitulo').textContent = `Nuevo mensaje — ${_tablonTrabNombre}`;
+  $('mmId').value = '';
+  $('mmTitulo').value = '';
+  $('mmContenido').value = '';
+  hide('modalMensajeError');
+  abrirModal('modalMensaje');
+}
+
+function editarMensaje(id, titulo, contenido) {
+  $('modalMensajeTitulo').textContent = 'Editar mensaje';
+  $('mmId').value = id;
+  $('mmTitulo').value = titulo;
+  $('mmContenido').value = contenido;
+  hide('modalMensajeError');
+  abrirModal('modalMensaje');
+}
+
+async function guardarMensaje() {
+  const id       = $('mmId').value;
+  const titulo   = $('mmTitulo').value.trim();
+  const contenido = $('mmContenido').value.trim();
+  if (!titulo || !contenido) return showMsg('modalMensajeError','Título y contenido requeridos','error');
+  try {
+    if (id) {
+      await api(`/api/admin/tablon/${id}`, 'PUT', { titulo, contenido });
+    } else {
+      await api(`/api/admin/tablon/${_tablonTrabId}`, 'POST', { titulo, contenido });
+    }
+    cerrarModal('modalMensaje');
+    cargarMensajesTablon();
+  } catch (e) { showMsg('modalMensajeError', e.message, 'error'); }
+}
+
+async function eliminarMensaje(id) {
+  if (!confirm('¿Eliminar este mensaje del tablón?')) return;
+  await api(`/api/admin/tablon/${id}`, 'DELETE', {});
+  cargarMensajesTablon();
 }
 
 // ── Exportar PDF ───────────────────────────────────────────
@@ -901,16 +996,13 @@ function exportarPDF() {
   const tid = $('pdfTrab').value;
   const mes = $('pdfMes').value;
   if (!tid) return alert('Selecciona una trabajadora');
-  const url = `/api/admin/pdf/${tid}${mes ? '?mes='+mes : ''}`;
-  window.open(url, '_blank');
+  window.open(`/api/admin/pdf/${tid}${mes ? '?mes='+mes : ''}`, '_blank');
 }
 
 // ── Alertas ────────────────────────────────────────────────
 async function cargarAlertas() {
   const rows = await api('/api/admin/estado-dia');
-  const sinFichar = rows.filter(r =>
-    r.estado === 'sin_fichar' && r.situacion === 'activa'
-  );
+  const sinFichar = rows.filter(r => r.estado === 'sin_fichar' && r.situacion === 'activa');
   const div = $('listaAlertas');
   if (!sinFichar.length) {
     div.innerHTML = '<p style="color:var(--verde);font-weight:700">✅ Todas las trabajadoras activas han fichado hoy</p>';
@@ -924,10 +1016,8 @@ async function cargarAlertas() {
 }
 
 // ── Modales ────────────────────────────────────────────────
-function abrirModal(id) { $(id).classList.add('open'); }
+function abrirModal(id)  { $(id).classList.add('open'); }
 function cerrarModal(id) { $(id).classList.remove('open'); }
-
-// Cerrar modales al hacer clic fuera
 document.querySelectorAll('.modal-overlay').forEach(o => {
   o.addEventListener('click', e => { if (e.target === o) cerrarModal(o.id); });
 });
@@ -936,7 +1026,13 @@ document.querySelectorAll('.modal-overlay').forEach(o => {
 function $(id) { return document.getElementById(id); }
 function show(id) { const e=$(id); if(e) e.classList.remove('hidden'); }
 function hide(id) { const e=$(id); if(e) e.classList.add('hidden'); }
-function esc(s) { return String(s).replace(/'/g,"\'").replace(/"/g,'&quot;'); }
+function esc(s)   { return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+function escJs(s) { return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n'); }
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 function showMsg(id, msg, tipo) {
   const el = $(id);
@@ -946,26 +1042,18 @@ function showMsg(id, msg, tipo) {
 }
 
 function estadoLabel(e) {
-  const m = {
-    en_jornada:'En jornada', en_pausa:'En pausa', completada:'Completada',
-    sin_fichar:'Sin fichar', it:'IT', baja:'Baja', vacaciones:'Vacaciones'
-  };
-  return m[e] || e;
+  return { en_jornada:'En jornada', en_pausa:'En pausa', completada:'Completada',
+           sin_fichar:'Sin fichar', it:'IT', baja:'Baja', vacaciones:'Vacaciones' }[e] || e;
 }
 
 async function api(url, method='GET', body=null) {
-  const opts = {
-    method,
-    headers: { 'Content-Type': 'application/json' }
-  };
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
   if (ATOKEN) opts.headers['Authorization'] = 'Bearer ' + ATOKEN;
   if (body)   opts.body = JSON.stringify(body);
   const r = await fetch(url, opts);
   if (r.status === 401) {
-    ATOKEN = null;
-    localStorage.removeItem('ch_admin_token');
-    hide('panelAdmin');
-    show('seccionLogin');
+    ATOKEN = null; localStorage.removeItem('ch_admin_token');
+    hide('panelAdmin'); show('seccionLogin');
     $('seccionLogin').style.display = 'flex';
     throw new Error('Sesión expirada');
   }
@@ -974,15 +1062,17 @@ async function api(url, method='GET', body=null) {
   return data;
 }
 
-// Enter en login
 document.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const lEl = $('seccionLogin');
-    if (lEl && !lEl.classList.contains('hidden') && window.getComputedStyle(lEl).display !== 'none') {
-      doAdminLogin();
-    }
-  }
+  if (e.key !== 'Enter') return;
+  const lEl = $('seccionLogin');
+  if (lEl && window.getComputedStyle(lEl).display !== 'none') doAdminLogin();
 });
+
+// Auto-refresh estado del día cada 5 min cuando está visible
+setInterval(() => {
+  const sec = $('sec-estadoDia');
+  if (sec && sec.classList.contains('activa')) cargarEstadoDia();
+}, 300000);
 </script>
 </body>
 </html>
