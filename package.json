@@ -1,0 +1,18 @@
+{
+  "name": "control-horario-1",
+  "version": "1.0.0",
+  "description": "Control horario para empresas de limpieza - Webgest",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^3.0.3",
+    "pdfkit": "^0.14.0",
+    "twilio": "^4.19.3"
+  }
+}
