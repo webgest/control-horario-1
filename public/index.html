@@ -35,7 +35,7 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
   .header h1 { font-size: 1.1rem; font-weight: 700; }
-  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .btn-admin-link {
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.4);
@@ -44,17 +44,12 @@
     border-radius: 6px;
     text-decoration: none;
     font-size: 0.8rem;
-    cursor: pointer;
   }
   .btn-logout {
     background: none; border: none; color: #ccc;
     font-size: 0.85rem; cursor: pointer; text-decoration: underline;
   }
-  .container {
-    width: 100%; max-width: 480px;
-    padding: 20px 16px;
-    flex: 1;
-  }
+  .container { width: 100%; max-width: 480px; padding: 20px 16px; flex: 1; }
 
   /* ── LOGIN ─────────────────────────────────────── */
   .card {
@@ -67,88 +62,50 @@
   .card h2 { font-size: 1.2rem; color: var(--azul-osc); margin-bottom: 20px; text-align: center; }
   .form-group { margin-bottom: 16px; }
   .form-group label {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--gris);
-    margin-bottom: 6px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    display: block; font-size: 0.85rem; color: var(--gris);
+    margin-bottom: 6px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
   }
   .form-group input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid #CFD8DC;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
+    width: 100%; padding: 14px 16px;
+    border: 2px solid #CFD8DC; border-radius: 10px;
+    font-size: 1.1rem; outline: none;
+    transition: border-color 0.2s; -webkit-appearance: none;
   }
   .form-group input:focus { border-color: var(--azul); }
   .btn-primary {
-    width: 100%;
-    padding: 16px;
-    background: var(--azul);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 4px;
+    width: 100%; padding: 16px;
+    background: var(--azul); color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    transition: background 0.2s; margin-top: 4px;
   }
   .btn-primary:active { background: var(--azul-osc); }
   .btn-primary:disabled { background: #90A4AE; cursor: not-allowed; }
   .rgpd {
-    font-size: 0.72rem;
-    color: #90A4AE;
-    text-align: center;
-    line-height: 1.5;
-    margin-top: 14px;
+    font-size: 0.72rem; color: #90A4AE;
+    text-align: center; line-height: 1.5; margin-top: 14px;
   }
   .error-msg {
-    background: #FFEBEE;
-    color: var(--rojo);
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    margin-bottom: 14px;
-    display: none;
+    background: #FFEBEE; color: var(--rojo);
+    padding: 12px 16px; border-radius: 8px;
+    font-size: 0.9rem; margin-bottom: 14px; display: none;
   }
 
   /* ── PANEL TRABAJADORA ──────────────────────────── */
-  .trabajadora-info {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .trabajadora-info .nombre {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--azul-osc);
-  }
-  .trabajadora-info .empresa {
-    font-size: 0.85rem;
-    color: var(--gris);
-    margin-top: 4px;
-  }
+  .trabajadora-info { text-align: center; margin-bottom: 20px; }
+  .trabajadora-info .nombre { font-size: 1.2rem; font-weight: 700; color: var(--azul-osc); }
+  .trabajadora-info .empresa { font-size: 0.85rem; color: var(--gris); margin-top: 4px; }
 
-  /* Botón único de estado (grande, móvil-first) */
   .btn-estado {
-    width: 100%;
-    padding: 28px 20px;
-    border: none;
-    border-radius: 16px;
-    font-size: 1.3rem;
-    font-weight: 800;
-    cursor: pointer;
-    color: #fff;
+    width: 100%; padding: 28px 20px;
+    border: none; border-radius: 16px;
+    font-size: 1.3rem; font-weight: 800;
+    cursor: pointer; color: #fff;
     letter-spacing: 0.04em;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     transition: transform 0.1s, box-shadow 0.1s;
-    display: block;
-    margin: 0 auto 20px;
+    display: block; margin: 0 auto 16px;
     text-transform: uppercase;
   }
   .btn-estado:active { transform: scale(0.97); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
@@ -158,87 +115,119 @@
   .btn-estado.salida   { background: var(--rojo); }
   .btn-estado:disabled { background: #90A4AE; cursor: not-allowed; transform: none; }
 
-  /* Info de jornada */
   .info-jornada {
-    background: var(--blanco);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    background: var(--blanco); border-radius: 14px;
+    padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     margin-bottom: 16px;
   }
   .info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #ECEFF1;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid #ECEFF1;
   }
   .info-row:last-child { border-bottom: none; }
   .info-row .label { font-size: 0.85rem; color: var(--gris); }
   .info-row .value { font-size: 1rem; font-weight: 700; color: #263238; }
   .countdown {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--azul);
-    text-align: center;
-    padding: 10px 0;
-    letter-spacing: 0.08em;
+    font-size: 1.8rem; font-weight: 800; color: var(--azul);
+    text-align: center; padding: 10px 0; letter-spacing: 0.08em;
   }
   .countdown.urgente { color: var(--rojo); }
 
-  /* Mensaje jornada completada */
   .msg-completada {
     background: linear-gradient(135deg, #1B5E20, #2E7D32);
-    color: #fff;
-    border-radius: 14px;
-    padding: 28px 24px;
-    text-align: center;
-    margin-bottom: 16px;
-    display: none;
+    color: #fff; border-radius: 14px;
+    padding: 28px 24px; text-align: center;
+    margin-bottom: 16px; display: none;
   }
   .msg-completada h3 { font-size: 1.3rem; margin-bottom: 12px; }
   .msg-completada p  { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; }
   .msg-completada .tel { font-size: 1.1rem; font-weight: 700; margin-top: 12px; }
 
-  /* Historial */
-  .historial-titulo {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--gris);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 10px;
+  /* ── TABS ──────────────────────────────────────── */
+  .tabs {
+    display: flex; gap: 0;
+    background: var(--blanco);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    flex: 1; padding: 12px 8px;
+    background: none; border: none;
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--gris); cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn.activo { color: var(--azul); border-bottom-color: var(--azul); }
+  .tab-content { display: none; }
+  .tab-content.activo { display: block; }
+
+  /* ── HISTORIAL ──────────────────────────────────── */
+  .historial-wrap {
+    background: var(--blanco);
+    border-radius: 0 0 12px 12px;
+    padding: 12px 0 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 16px;
   }
   .historial-item {
-    background: var(--blanco);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 12px 16px; margin: 0;
+    border-bottom: 1px solid #F0F4F8;
+    display: flex; justify-content: space-between; align-items: center;
   }
+  .historial-item:last-child { border-bottom: none; }
   .historial-fecha { font-weight: 600; font-size: 0.9rem; color: #263238; }
   .historial-horas { font-size: 0.85rem; color: var(--gris); margin-top: 3px; }
   .historial-times { text-align: right; font-size: 0.85rem; color: var(--gris); }
   .badge-auto {
-    font-size: 0.7rem;
-    background: #FFF8E1;
-    color: #F57F17;
-    padding: 2px 7px;
-    border-radius: 10px;
-    font-weight: 600;
+    font-size: 0.7rem; background: #FFF8E1; color: #F57F17;
+    padding: 2px 7px; border-radius: 10px; font-weight: 600;
+  }
+  .empty-msg {
+    text-align: center; color: #90A4AE;
+    font-size: 0.85rem; padding: 20px;
   }
 
-  /* Ocultar/mostrar secciones */
-  .hidden { display: none !important; }
+  /* ── TABLÓN ─────────────────────────────────────── */
+  .tablon-wrap {
+    background: var(--blanco);
+    border-radius: 0 0 12px 12px;
+    padding: 12px 0 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 16px;
+  }
+  .tablon-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid #F0F4F8;
+  }
+  .tablon-item:last-child { border-bottom: none; }
+  .tablon-titulo {
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--azul-osc); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tablon-contenido {
+    font-size: 0.88rem; color: #37474F;
+    line-height: 1.55; white-space: pre-wrap;
+  }
+  .tablon-fecha {
+    font-size: 0.75rem; color: #90A4AE; margin-top: 6px;
+  }
+  .tablon-badge {
+    display: inline-block;
+    background: var(--azul); color: #fff;
+    font-size: 0.7rem; font-weight: 700;
+    border-radius: 10px; padding: 1px 7px;
+    min-width: 20px; text-align: center;
+    margin-left: 4px;
+  }
 
-  /* Spinner */
+  .hidden { display: none !important; }
   .spinner {
     width: 32px; height: 32px;
-    border: 4px solid #E0E0E0;
-    border-top-color: var(--azul);
+    border: 4px solid #E0E0E0; border-top-color: var(--azul);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     margin: 40px auto;
@@ -258,7 +247,6 @@
 
 <div class="container">
 
-  <!-- SPINNER carga inicial -->
   <div id="spinnerInicial" class="spinner"></div>
 
   <!-- LOGIN -->
@@ -269,8 +257,7 @@
       <div class="form-group">
         <label>DNI</label>
         <input type="text" id="inputDNI" placeholder="Ej: 12345678A"
-               autocomplete="off" autocapitalize="characters" spellcheck="false"
-               maxlength="9">
+               autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9">
       </div>
       <div class="form-group">
         <label>PIN (4 dígitos)</label>
@@ -294,13 +281,11 @@
       <div class="empresa" id="panelEmpresa"></div>
     </div>
 
-    <!-- Mensaje COMPLETADA (permanente) -->
+    <!-- Mensaje COMPLETADA -->
     <div class="msg-completada" id="msgCompletada">
       <h3>✅ Tu jornada laboral ha finalizado</h3>
-      <p>
-        No puedes seguir trabajando. <strong>¡Que descanses!</strong><br><br>
-        Si tienes alguna duda o sugerencia:
-      </p>
+      <p>No puedes seguir trabajando. <strong>¡Que descanses!</strong><br><br>
+         Si tienes alguna duda o sugerencia:</p>
       <p class="tel">📞 655 588 770</p>
     </div>
 
@@ -321,27 +306,36 @@
       <div class="countdown hidden" id="countdown"></div>
     </div>
 
-    <!-- BOTONES DE ACCIÓN -->
-    <button class="btn-estado entrada hidden"  id="btnEntrada"  onclick="accion('entrada')">
-      📍 FICHAR ENTRADA
-    </button>
-    <button class="btn-estado pausa hidden"    id="btnPausa"    onclick="accion('pausa')">
-      ⏸ PAUSAR JORNADA
-    </button>
-    <button class="btn-estado reanudar hidden" id="btnReanudar" onclick="accion('reanudar')">
-      ▶ REANUDAR JORNADA
-    </button>
-    <button class="btn-estado salida hidden"   id="btnSalida"   onclick="accion('salida')">
-      🏁 FINALIZAR JORNADA
-    </button>
+    <!-- BOTONES -->
+    <button class="btn-estado entrada hidden"  id="btnEntrada"  onclick="accion('entrada')">📍 FICHAR ENTRADA</button>
+    <button class="btn-estado pausa hidden"    id="btnPausa"    onclick="accion('pausa')">⏸ PAUSAR JORNADA</button>
+    <button class="btn-estado reanudar hidden" id="btnReanudar" onclick="accion('reanudar')">▶ REANUDAR JORNADA</button>
+    <button class="btn-estado salida hidden"   id="btnSalida"   onclick="accion('salida')">🏁 FINALIZAR JORNADA</button>
 
-    <!-- HISTORIAL -->
-    <div class="historial-titulo">Historial del mes</div>
-    <div id="historial"></div>
+    <!-- TABS Historial / Tablón -->
+    <div class="tabs">
+      <button class="tab-btn activo" id="tab-historial" onclick="cambiarTab('historial')">
+        📋 Historial del mes
+      </button>
+      <button class="tab-btn" id="tab-tablon" onclick="cambiarTab('tablon')">
+        📌 Tablón
+        <span class="tablon-badge hidden" id="tablonBadge">0</span>
+      </button>
+    </div>
+
+    <!-- Tab: Historial -->
+    <div class="historial-wrap tab-content activo" id="contenidoHistorial">
+      <div id="historial" class="empty-msg">Cargando…</div>
+    </div>
+
+    <!-- Tab: Tablón -->
+    <div class="historial-wrap tab-content" id="contenidoTablon">
+      <div id="tablonMensajes" class="empty-msg">Cargando…</div>
+    </div>
 
   </div><!-- /seccionPanel -->
 
-</div><!-- /container -->
+</div>
 
 <script>
 // ── Estado global ──────────────────────────────────────────
@@ -352,12 +346,29 @@ let timerCountdown = null;
 
 // ── Arranque ───────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', async () => {
-  if (TOKEN) {
+  // 1. Comprobar acceso por carnet (QR)
+  const params    = new URLSearchParams(window.location.search);
+  const carnetCode = params.get('carnet');
+
+  if (carnetCode) {
+    TOKEN = null;
     try {
+      const r = await api(`/api/carnet/${carnetCode}`);
+      TOKEN = r.token;
+      localStorage.setItem('ch_token', TOKEN);
+      history.replaceState(null, '', '/');
       await cargarPanel();
-    } catch {
+    } catch (e) {
       mostrarLogin();
+      mostrarError('loginError', e.message || 'Carnet no válido');
+      show('seccionLogin');
     }
+    return;
+  }
+
+  // 2. Sesión normal
+  if (TOKEN) {
+    try { await cargarPanel(); } catch { mostrarLogin(); }
   } else {
     mostrarLogin();
   }
@@ -385,20 +396,17 @@ async function cargarPanel() {
 
   await actualizarEstado();
   await cargarHistorial();
+  await cargarTablon();
 }
 
 // ── Login ──────────────────────────────────────────────────
 async function doLogin() {
   const dni = $('inputDNI').value.trim().toUpperCase();
   const pin = $('inputPIN').value.trim();
-
   if (!dni || !pin) return mostrarError('loginError', 'Introduce tu DNI y PIN');
   ocultarError('loginError');
-
   const btn = document.querySelector('.btn-primary');
-  btn.disabled = true;
-  btn.textContent = 'Accediendo…';
-
+  btn.disabled = true; btn.textContent = 'Accediendo…';
   try {
     const r = await api('/api/login', 'POST', { dni, pin });
     TOKEN = r.token;
@@ -408,17 +416,15 @@ async function doLogin() {
   } catch (e) {
     mostrarError('loginError', e.message);
   } finally {
-    btn.disabled = false;
-    btn.textContent = 'ENTRAR';
+    btn.disabled = false; btn.textContent = 'ENTRAR';
   }
 }
 
 // ── Acciones fichaje ───────────────────────────────────────
 async function accion(tipo) {
-  const mapBtn = { entrada: 'btnEntrada', pausa: 'btnPausa', reanudar: 'btnReanudar', salida: 'btnSalida' };
+  const mapBtn = { entrada:'btnEntrada', pausa:'btnPausa', reanudar:'btnReanudar', salida:'btnSalida' };
   const btn = $(mapBtn[tipo]);
   btn.disabled = true;
-
   try {
     await api(`/api/fichar/${tipo}`, 'POST', {});
     await actualizarEstado();
@@ -430,12 +436,11 @@ async function accion(tipo) {
   }
 }
 
-// ── Actualizar estado desde API ────────────────────────────
+// ── Actualizar estado ──────────────────────────────────────
 async function actualizarEstado() {
   const data = await api('/api/fichar/estado');
   estadoActual = data.estado;
 
-  // Ocultar todo primero
   ['btnEntrada','btnPausa','btnReanudar','btnSalida'].forEach(b => hide(b));
   hide('msgCompletada');
   hide('infoJornada');
@@ -449,28 +454,22 @@ async function actualizarEstado() {
     show('btnEntrada');
     return;
   }
-
   if (estadoActual === 'completada') {
     show('msgCompletada');
-    // Mostrar hora de salida si disponible
-    if (data.hora_salida_display && data.hora_salida_display !== '—') {
-      const p = document.createElement('p');
-      p.style.marginTop = '8px';
-      p.style.fontWeight = '700';
-      p.textContent = `Salida registrada a las ${data.hora_salida_display}`;
-      // solo añadir si no existe ya
-      const mc = $('msgCompletada');
-      if (!mc.querySelector('.hora-salida-msg')) {
-        p.className = 'hora-salida-msg';
-        mc.appendChild(p);
-      }
+    const mc = $('msgCompletada');
+    let extra = mc.querySelector('.hora-salida-msg');
+    if (!extra && data.hora_salida_display && data.hora_salida_display !== '—') {
+      extra = document.createElement('p');
+      extra.className = 'hora-salida-msg';
+      extra.style.marginTop = '8px';
+      extra.style.fontWeight = '700';
+      extra.textContent = `Salida registrada a las ${data.hora_salida_display}`;
+      mc.appendChild(extra);
     }
     return;
   }
 
-  // EN JORNADA o EN PAUSA
   show('infoJornada');
-
   if (data.hora_entrada_display) {
     $('valEntrada').textContent = data.hora_entrada_display;
     $('rowEntrada').style.display = 'flex';
@@ -479,25 +478,19 @@ async function actualizarEstado() {
     $('valFinPrevisto').textContent = data.hora_fin_display;
     $('rowFinPrevisto').style.display = 'flex';
   }
-
   horaFinUTC = data.hora_fin_prevista;
 
   if (estadoActual === 'en_jornada') {
-    show('btnPausa');
-    show('btnSalida');
-    show('countdown');
-    iniciarCountdown();
+    show('btnPausa'); show('btnSalida');
+    show('countdown'); iniciarCountdown();
   }
-
   if (estadoActual === 'en_pausa') {
     show('btnReanudar');
     if (data.pausa_inicio_display) {
       $('valPausaInicio').textContent = data.pausa_inicio_display;
       $('rowPausa').style.display = 'flex';
     }
-    // Countdown sigue corriendo (jornada se extiende)
-    show('countdown');
-    iniciarCountdown();
+    show('countdown'); iniciarCountdown();
   }
 }
 
@@ -505,26 +498,25 @@ async function actualizarEstado() {
 function iniciarCountdown() {
   function tick() {
     if (!horaFinUTC) return;
-    const fin = new Date(horaFinUTC.replace(' ', 'T') + 'Z');
+    const fin  = new Date(horaFinUTC.replace(' ', 'T') + 'Z');
     const diff = Math.max(0, Math.round((fin - Date.now()) / 1000));
     const h = Math.floor(diff / 3600);
     const m = Math.floor((diff % 3600) / 60);
     const s = diff % 60;
-    const txt = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
     const el = $('countdown');
-    el.textContent = diff > 0 ? `⏳ ${txt}` : '⌛ Jornada finalizada';
+    el.textContent = diff > 0
+      ? `⏳ ${pad(h)}:${pad(m)}:${pad(s)}`
+      : '⌛ Jornada finalizada';
     el.classList.toggle('urgente', diff <= 300);
-
-    // Si ya terminó el tiempo, recargar estado
     if (diff === 0) {
-      clearInterval(timerCountdown);
-      timerCountdown = null;
+      clearInterval(timerCountdown); timerCountdown = null;
       setTimeout(actualizarEstado, 3000);
     }
   }
   tick();
   timerCountdown = setInterval(tick, 1000);
 }
+function pad(n) { return String(n).padStart(2, '0'); }
 
 // ── Historial ──────────────────────────────────────────────
 async function cargarHistorial() {
@@ -532,14 +524,17 @@ async function cargarHistorial() {
     const registros = await api('/api/fichar/historial');
     const div = $('historial');
     if (!registros.length) {
-      div.innerHTML = '<p style="color:#90A4AE;text-align:center;font-size:0.85rem">Sin registros este mes</p>';
+      div.innerHTML = '<div class="empty-msg">Sin registros este mes</div>';
       return;
     }
     div.innerHTML = registros.map(r => `
       <div class="historial-item">
         <div>
           <div class="historial-fecha">${r.fecha}</div>
-          <div class="historial-horas">${r.horas_trabajadas ? r.horas_trabajadas.toFixed(2) + 'h trabajadas' : 'En curso'} ${r.completado_auto ? '<span class="badge-auto">Auto</span>' : ''}</div>
+          <div class="historial-horas">
+            ${r.horas_trabajadas ? r.horas_trabajadas.toFixed(2) + 'h' : 'En curso'}
+            ${r.completado_auto ? '<span class="badge-auto">Auto</span>' : ''}
+          </div>
         </div>
         <div class="historial-times">
           <div>▶ ${r.hora_entrada_display}</div>
@@ -550,15 +545,60 @@ async function cargarHistorial() {
   } catch {}
 }
 
+// ── Tablón ─────────────────────────────────────────────────
+async function cargarTablon() {
+  try {
+    const mensajes = await api('/api/tablon');
+    const div = $('tablonMensajes');
+    const badge = $('tablonBadge');
+
+    if (!mensajes.length) {
+      div.innerHTML = '<div class="empty-msg">No hay mensajes en el tablón</div>';
+      hide('tablonBadge');
+      return;
+    }
+
+    badge.textContent = mensajes.length;
+    show('tablonBadge');
+
+    div.innerHTML = mensajes.map(m => `
+      <div class="tablon-item">
+        <div class="tablon-titulo">📌 ${escHtml(m.titulo)}</div>
+        <div class="tablon-contenido">${escHtml(m.contenido)}</div>
+        <div class="tablon-fecha">${fmtFecha(m.fecha_creacion)}</div>
+      </div>
+    `).join('');
+  } catch {}
+}
+
+function cambiarTab(tab) {
+  ['historial','tablon'].forEach(t => {
+    $(  `tab-${t}`).classList.toggle('activo', t === tab);
+    `contenido${cap(t)}`;
+    document.getElementById('contenido' + cap(t)).classList.toggle('activo', t === tab);
+  });
+}
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function fmtFecha(iso) {
+  if (!iso) return '';
+  return iso.slice(0, 10);
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 // ── Logout ─────────────────────────────────────────────────
 function logout() {
   TOKEN = null;
   localStorage.removeItem('ch_token');
   if (timerCountdown) clearInterval(timerCountdown);
-  estadoActual = null;
-  horaFinUTC   = null;
+  estadoActual = null; horaFinUTC = null;
   $('historial').innerHTML = '';
-  // Limpiar msg completada adicional
+  $('tablonMensajes').innerHTML = '';
   const mc = $('msgCompletada');
   const extra = mc.querySelector('.hora-salida-msg');
   if (extra) extra.remove();
@@ -567,8 +607,8 @@ function logout() {
 
 // ── Utilidades ─────────────────────────────────────────────
 function $(id) { return document.getElementById(id); }
-function show(id) { $(id).classList.remove('hidden'); }
-function hide(id) { $(id).classList.add('hidden'); }
+function show(id) { const e=$(id); if(e) e.classList.remove('hidden'); }
+function hide(id) { const e=$(id); if(e) e.classList.add('hidden'); }
 
 function mostrarError(id, msg) {
   const el = $(id);
@@ -578,33 +618,23 @@ function mostrarError(id, msg) {
 function ocultarError(id) { $(id).style.display = 'none'; }
 
 function parseJWT(token) {
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch { return null; }
+  try { return JSON.parse(atob(token.split('.')[1])); } catch { return null; }
 }
 
 async function api(url, method = 'GET', body = null) {
-  const opts = {
-    method,
-    headers: { 'Content-Type': 'application/json' }
-  };
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
   if (TOKEN) opts.headers['Authorization'] = 'Bearer ' + TOKEN;
   if (body)  opts.body = JSON.stringify(body);
-
   const r = await fetch(url, opts);
   const data = await r.json();
   if (!r.ok) throw new Error(data.error || 'Error en el servidor');
   return data;
 }
 
-// Enter en login
 document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !$('seccionLogin').classList.contains('hidden')) {
-    doLogin();
-  }
+  if (e.key === 'Enter' && !$('seccionLogin').classList.contains('hidden')) doLogin();
 });
 
-// Refrescar estado cada 60 segundos
 setInterval(() => {
   if (estadoActual && estadoActual !== 'sin_fichar' && estadoActual !== 'completada') {
     actualizarEstado();
