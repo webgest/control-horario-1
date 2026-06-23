@@ -183,6 +183,13 @@ db.exec(`
     fecha_creacion TEXT NOT NULL,
     activo         INTEGER NOT NULL DEFAULT 1
   );
+
+  CREATE TABLE IF NOT EXISTS festivos (
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha   TEXT NOT NULL UNIQUE,
+    nombre  TEXT NOT NULL,
+    tipo    TEXT NOT NULL DEFAULT 'nacional'
+  );
 `);
 
 // ── Migraciones para instancias ya existentes ──────────────
@@ -282,6 +289,35 @@ const seedData = () => {
 
 seedData();
 
+// ── Festivos nacionales ────────────────────────────────────
+{
+  const ins = db.prepare("INSERT OR IGNORE INTO festivos (fecha, nombre, tipo) VALUES (?,?,'nacional')");
+  const nacionales = [
+    // 2025
+    ['2025-01-01','Año Nuevo'],['2025-01-06','Reyes Magos'],
+    ['2025-04-17','Jueves Santo'],['2025-04-18','Viernes Santo'],
+    ['2025-05-01','Día del Trabajo'],['2025-08-15','Asunción de la Virgen'],
+    ['2025-10-12','Fiesta Nacional de España'],['2025-11-01','Todos los Santos'],
+    ['2025-12-06','Día de la Constitución'],['2025-12-08','Inmaculada Concepción'],
+    ['2025-12-25','Navidad'],
+    // 2026
+    ['2026-01-01','Año Nuevo'],['2026-01-06','Reyes Magos'],
+    ['2026-04-02','Jueves Santo'],['2026-04-03','Viernes Santo'],
+    ['2026-05-01','Día del Trabajo'],['2026-08-15','Asunción de la Virgen'],
+    ['2026-10-12','Fiesta Nacional de España'],['2026-11-01','Todos los Santos'],
+    ['2026-12-06','Día de la Constitución'],['2026-12-08','Inmaculada Concepción'],
+    ['2026-12-25','Navidad'],
+    // 2027
+    ['2027-01-01','Año Nuevo'],['2027-01-06','Reyes Magos'],
+    ['2027-03-25','Jueves Santo'],['2027-03-26','Viernes Santo'],
+    ['2027-05-01','Día del Trabajo'],['2027-08-15','Asunción de la Virgen'],
+    ['2027-10-12','Fiesta Nacional de España'],['2027-11-01','Todos los Santos'],
+    ['2027-12-06','Día de la Constitución'],['2027-12-08','Inmaculada Concepción'],
+    ['2027-12-25','Navidad'],
+  ];
+  for (const [f, n] of nacionales) ins.run(f, n);
+}
+
 // ============================================================
 //  HELPERS AUTENTICACIÓN
 // ============================================================
@@ -318,9 +354,53 @@ function calcPausasTotales(fichajeId) {
   return total;
 }
 
-function calcHoraFinUTC(fichajeId, horaEntradaUTC, horasDia) {
+/** Días hábiles de un mes (excluye fines de semana y festivos) */
+function getWorkingDays(year, month) {
+  // month: 1-indexed
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const monthStr = `${year}-${String(month).padStart(2,'0')}`;
+  const festivosSet = new Set(
+    db.prepare('SELECT fecha FROM festivos WHERE fecha LIKE ?').all(monthStr + '%').map(f => f.fecha)
+  );
+  const days = [];
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dow = new Date(year, month - 1, d).getDay(); // 0=Dom, 6=Sáb
+    if (dow === 0 || dow === 6) continue;
+    if (festivosSet.has(dateStr)) continue;
+    days.push(dateStr);
+  }
+  return days;
+}
+
+/**
+ * Horas efectivas para un día concreto.
+ * En días normales = horasDiaContrato.
+ * En el último día hábil del mes = 169*(horasDia/8) − horas_ya_trabajadas (cuadre).
+ */
+function getHorasDiaEfectivas(trabajadoraId, horasDiaContrato, fechaMadrid) {
+  const [y, m] = fechaMadrid.split('-').map(Number);
+  const workingDays = getWorkingDays(y, m);
+  if (workingDays.length === 0) return horasDiaContrato;
+  const lastDay = workingDays[workingDays.length - 1];
+  if (fechaMadrid !== lastDay) return horasDiaContrato;
+
+  // Último día hábil → cuadre mensual
+  const totalMes = (horasDiaContrato / 8.0) * 169.0;
+  const { total: horasAcum } = db.prepare(`
+    SELECT COALESCE(SUM(horas_trabajadas), 0) AS total
+    FROM fichajes
+    WHERE trabajadora_id = ? AND fecha LIKE ? AND fecha < ? AND hora_salida IS NOT NULL
+  `).get(trabajadoraId, fechaMadrid.slice(0, 7) + '%', fechaMadrid);
+  return Math.max(0.1, totalMes - horasAcum);
+}
+
+function calcHoraFinUTC(fichajeId, horaEntradaUTC, horasDia, trabajadoraId, fechaMadrid) {
+  const horas = (trabajadoraId && fechaMadrid)
+    ? getHorasDiaEfectivas(trabajadoraId, horasDia, fechaMadrid)
+    : horasDia;
   const pausasSeg = calcPausasTotales(fichajeId);
-  const totalSeg  = Math.round(horasDia * 3600) + pausasSeg;
+  const totalSeg  = Math.round(horas * 3600) + pausasSeg;
   return addSecondsToDBTime(horaEntradaUTC, totalSeg);
 }
 
@@ -390,7 +470,7 @@ cron.schedule('* * * * *', () => {
 
   const ahora = nowDB();
   for (const f of abiertos) {
-    const horaFin = calcHoraFinUTC(f.id, f.hora_entrada, f.horas_dia);
+    const horaFin = calcHoraFinUTC(f.id, f.hora_entrada, f.horas_dia, f.trabajadora_id, f.fecha);
     if (ahora >= horaFin) {
       db.prepare(`UPDATE pausas SET fin = ? WHERE fichaje_id = ? AND fin IS NULL`).run(ahora, f.id);
       const pausasSeg = calcPausasTotales(f.id);
@@ -484,7 +564,7 @@ app.get('/api/fichar/estado', authMiddleware, (req, res) => {
   if (estado === 'sin_fichar') return res.json({ estado });
 
   const t = db.prepare('SELECT horas_dia FROM trabajadoras WHERE id = ?').get(req.user.id);
-  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia);
+  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia, req.user.id, fecha);
 
   const resp = {
     estado, fecha,
@@ -515,7 +595,7 @@ app.post('/api/fichar/entrada', authMiddleware, (req, res) => {
   const r = db.prepare(`INSERT INTO fichajes (trabajadora_id, fecha, hora_entrada) VALUES (?,?,?)`)
     .run(req.user.id, fecha, ahora);
 
-  const horaFinUTC = calcHoraFinUTC(r.lastInsertRowid, ahora, t.horas_dia);
+  const horaFinUTC = calcHoraFinUTC(r.lastInsertRowid, ahora, t.horas_dia, req.user.id, fecha);
   res.json({
     estado:               'en_jornada',
     hora_entrada_display:  fmtMadrid(ahora),
@@ -533,7 +613,7 @@ app.post('/api/fichar/pausa', authMiddleware, (req, res) => {
   db.prepare(`INSERT INTO pausas (fichaje_id, inicio) VALUES (?,?)`).run(fichaje.id, ahora);
 
   const t = db.prepare('SELECT horas_dia FROM trabajadoras WHERE id = ?').get(req.user.id);
-  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia);
+  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia, req.user.id, fecha);
 
   res.json({
     estado:               'en_pausa',
@@ -552,7 +632,7 @@ app.post('/api/fichar/reanudar', authMiddleware, (req, res) => {
   db.prepare(`UPDATE pausas SET fin = ? WHERE id = ?`).run(ahora, pausa.id);
 
   const t = db.prepare('SELECT horas_dia FROM trabajadoras WHERE id = ?').get(req.user.id);
-  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia);
+  const horaFinUTC = calcHoraFinUTC(fichaje.id, fichaje.hora_entrada, t.horas_dia, req.user.id, fecha);
 
   res.json({
     estado:               'en_jornada',
@@ -697,17 +777,18 @@ app.post('/api/admin/trabajadoras', adminMiddleware, (req, res) => {
 });
 
 app.put('/api/admin/trabajadoras/:id', adminMiddleware, (req, res) => {
-  const { nombre, apellidos, horas_dia, dias_mes, telefono, situacion, activa, pin } = req.body;
+  const { empresa_id, nombre, apellidos, horas_dia, dias_mes, telefono, situacion, activa, pin } = req.body;
   const t = db.prepare('SELECT * FROM trabajadoras WHERE id = ?').get(req.params.id);
   if (!t) return res.status(404).json({ error: 'No encontrada' });
 
   const pin_hash = pin ? bcrypt.hashSync(pin, 10) : t.pin_hash;
   db.prepare(`
     UPDATE trabajadoras
-    SET nombre=?, apellidos=?, horas_dia=?, dias_mes=?, telefono=?,
+    SET empresa_id=?, nombre=?, apellidos=?, horas_dia=?, dias_mes=?, telefono=?,
         situacion=?, activa=?, pin_hash=?
     WHERE id=?
   `).run(
+    empresa_id !== undefined ? empresa_id : t.empresa_id,
     nombre    || t.nombre,
     apellidos !== undefined ? apellidos : t.apellidos,
     horas_dia !== undefined ? horas_dia : t.horas_dia,
@@ -722,9 +803,9 @@ app.put('/api/admin/trabajadoras/:id', adminMiddleware, (req, res) => {
     INSERT INTO auditoria (tabla, registro_id, campo, valor_antes, valor_despues, usuario, fecha, motivo)
     VALUES ('trabajadoras', ?, 'modificacion', ?, ?, 'admin', ?, ?)
   `).run(req.params.id,
-    JSON.stringify({ nombre: t.nombre, situacion: t.situacion }),
-    JSON.stringify({ nombre: nombre || t.nombre, situacion: situacion || t.situacion }),
-    'admin', nowDB(), req.body.motivo || null
+    JSON.stringify({ nombre: t.nombre, situacion: t.situacion, empresa_id: t.empresa_id }),
+    JSON.stringify({ nombre: nombre || t.nombre, situacion: situacion || t.situacion, empresa_id: empresa_id || t.empresa_id }),
+    nowDB(), req.body.motivo || null
   );
 
   res.json({ ok: true });
@@ -735,6 +816,62 @@ app.post('/api/admin/trabajadoras/:id/regenerar-carnet', adminMiddleware, (req, 
   const nuevo = crypto.randomBytes(6).toString('hex');
   db.prepare('UPDATE trabajadoras SET codigo_carnet = ? WHERE id = ?').run(nuevo, req.params.id);
   res.json({ codigo_carnet: nuevo });
+});
+
+// ============================================================
+//  API — ADMIN — FESTIVOS
+// ============================================================
+
+app.get('/api/admin/festivos', adminMiddleware, (req, res) => {
+  const año = req.query.año || new Date().getUTCFullYear();
+  res.json(db.prepare('SELECT * FROM festivos WHERE fecha LIKE ? ORDER BY fecha').all(`${año}%`));
+});
+
+app.post('/api/admin/festivos', adminMiddleware, (req, res) => {
+  const { fecha, nombre } = req.body;
+  if (!fecha || !nombre) return res.status(400).json({ error: 'Fecha y nombre requeridos' });
+  try {
+    const r = db.prepare("INSERT INTO festivos (fecha, nombre, tipo) VALUES (?,?,'local')").run(fecha, nombre);
+    res.json({ id: r.lastInsertRowid, fecha, nombre, tipo: 'local' });
+  } catch (e) {
+    if (e.message.includes('UNIQUE')) return res.status(400).json({ error: 'Ya existe un festivo en esa fecha' });
+    throw e;
+  }
+});
+
+app.delete('/api/admin/festivos/:id', adminMiddleware, (req, res) => {
+  const f = db.prepare('SELECT tipo FROM festivos WHERE id = ?').get(req.params.id);
+  if (!f) return res.status(404).json({ error: 'No encontrado' });
+  if (f.tipo === 'nacional') return res.status(403).json({ error: 'No se pueden eliminar festivos nacionales predefinidos' });
+  db.prepare('DELETE FROM festivos WHERE id = ?').run(req.params.id);
+  res.json({ ok: true });
+});
+
+// Días hábiles de un mes (útil para el panel admin)
+app.get('/api/admin/dias-habiles', adminMiddleware, (req, res) => {
+  const { año, mes } = req.query;
+  if (!año || !mes) return res.status(400).json({ error: 'Parámetros año y mes requeridos' });
+  const dias = getWorkingDays(parseInt(año), parseInt(mes));
+  res.json({ dias, total: dias.length });
+});
+
+// ============================================================
+//  API — ADMIN — CARNETS (impresión masiva QR)
+// ============================================================
+
+app.get('/api/admin/carnets', adminMiddleware, (req, res) => {
+  const { empresa_id } = req.query;
+  let sql = `
+    SELECT t.id, t.nombre, t.apellidos, t.dni, t.horas_dia, t.situacion,
+           t.codigo_carnet, e.nombre AS empresa_nombre, e.id AS empresa_id
+    FROM trabajadoras t
+    JOIN empresas e ON e.id = t.empresa_id
+    WHERE t.activa = 1 AND t.es_prueba = 0
+  `;
+  const params = [];
+  if (empresa_id) { sql += ' AND t.empresa_id = ?'; params.push(empresa_id); }
+  sql += ' ORDER BY e.nombre, t.apellidos, t.nombre';
+  res.json(db.prepare(sql).all(...params));
 });
 
 // ============================================================
@@ -848,6 +985,7 @@ app.put('/api/admin/fichajes/:id', adminMiddleware, (req, res) => {
   let nuevaEntrada = hora_entrada ? `${f.fecha} ${hora_entrada}` : f.hora_entrada;
   let nuevaSalida  = hora_salida  ? `${f.fecha} ${hora_salida}`  : f.hora_salida;
 
+  // Si vienen en hora Madrid, convertir a UTC
   if (madrid_time) {
     if (hora_entrada) nuevaEntrada = madridToUTC(f.fecha, hora_entrada) || nuevaEntrada;
     if (hora_salida)  nuevaSalida  = madridToUTC(f.fecha, hora_salida)  || nuevaSalida;
