@@ -187,6 +187,8 @@
       <div class="sep">Herramientas</div>
       <a onclick="mostrarSeccion('exportar')"     id="nav-exportar">📄 Exportar PDF</a>
       <a onclick="mostrarSeccion('alertas')"      id="nav-alertas">🔔 Alertas</a>
+      <a onclick="mostrarSeccion('festivos')"     id="nav-festivos">📅 Festivos</a>
+      <a href="/carnets.html" target="_blank"                      >🖸️ Imprimir Carnets</a>
     </nav>
 
     <main class="main">
@@ -342,6 +344,39 @@
         </div>
       </div>
 
+
+      <!-- FESTIVOS -->
+      <div id="sec-festivos" class="seccion">
+        <div class="card">
+          <h2>📅 Calendario de Festivos</h2>
+          <p style="color:var(--gris);font-size:0.85rem;margin-bottom:16px">
+            Los festivos nacionales están predefinidos y no pueden eliminarse. Puedes añadir festivos locales o regionales que se aplicarán a todas las trabajadoras.
+          </p>
+          <div class="filtros" style="margin-bottom:20px">
+            <div class="form-group">
+              <label>Año</label>
+              <select id="festivosAño" onchange="cargarFestivos()">
+                <option value="2025">2025</option>
+                <option value="2026" selected>2026</option>
+                <option value="2027">2027</option>
+              </select>
+            </div>
+            <button class="btn-sm btn-primary" onclick="cargarFestivos()">🔄 Cargar</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <h3 style="margin:0">Festivos del año seleccionado</h3>
+            <button class="btn-sm btn-success" onclick="abrirModalNuevoFestivo()">+ Añadir festivo local</button>
+          </div>
+          <div class="tabla-wrap">
+            <table>
+              <thead><tr><th>Fecha</th><th>Nombre</th><th>Tipo</th><th>Días hábiles del mes</th><th>Acción</th></tr></thead>
+              <tbody id="bodyFestivos"></tbody>
+            </table>
+          </div>
+          <div id="diasHabilesInfo" style="margin-top:20px;padding:14px;background:#E3F2FD;border-radius:8px;font-size:0.88rem;display:none"></div>
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
@@ -384,7 +419,7 @@
     <div class="msg error hidden" id="modalTrabError"></div>
     <input type="hidden" id="mtId">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="form-group" style="grid-column:1/-1"><label>Empresa</label><select id="mtEmpresa"></select></div>
+      <div class="form-group" style="grid-column:1/-1"><label>Empresa</label><select id="mtEmpresa"><option value="">— Seleccionar empresa —</option></select></div>
       <div class="form-group"><label>Apellidos</label><input type="text" id="mtApellidos"></div>
       <div class="form-group"><label>Nombre</label><input type="text" id="mtNombre"></div>
       <div class="form-group"><label>DNI</label><input type="text" id="mtDNI" placeholder="12345678A" autocapitalize="characters"></div>
@@ -443,6 +478,23 @@
     <p style="font-size:0.72rem;color:#90A4AE;margin-top:12px">
       Imprima este QR para entregarlo a la trabajadora.<br>Si se pierde, use "Regenerar" para invalidar el código anterior.
     </p>
+  </div>
+</div>
+
+<!-- ── MODAL NUEVO FESTIVO ─────────────────────────────── -->
+<div class="modal-overlay" id="modalFestivo">
+  <div class="modal">
+    <h3>Añadir festivo local</h3>
+    <div class="msg error hidden" id="modalFestivoError"></div>
+    <p style="font-size:0.82rem;color:var(--gris);margin-bottom:14px">
+      Los festivos locales se aplicarán a todas las trabajadoras y se tendrán en cuenta al calcular los días hábiles y el cuadre mensual.
+    </p>
+    <div class="form-group"><label>Fecha</label><input type="date" id="ffFecha"></div>
+    <div class="form-group"><label>Nombre del festivo</label><input type="text" id="ffNombre" placeholder="Ej: Feria local, Fiesta del barrio…"></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-gray" onclick="cerrarModal('modalFestivo')">Cancelar</button>
+      <button class="btn-sm btn-success" onclick="guardarFestivo()">Añadir</button>
+    </div>
   </div>
 </div>
 
@@ -530,7 +582,8 @@ function mostrarSeccion(id) {
     empresas:     cargarEmpresasTabla,
     tablon:       () => cargarTrabsTablon(),
     exportar:     () => {},
-    alertas:      cargarAlertas
+    alertas:      cargarAlertas,
+    festivos:     cargarFestivos
   };
   if (acc[id]) acc[id]();
 }
@@ -548,7 +601,7 @@ function rellenarSelectEmpresas() {
   for (const id of selects) {
     const el = $(id);
     if (!el) continue;
-    const primero = el.children[0].outerHTML;
+    const primero = el.children.length > 0 ? el.children[0].outerHTML : '';
     el.innerHTML = primero;
     empresas.forEach(e => {
       const opt = document.createElement('option');
@@ -1073,6 +1126,73 @@ setInterval(() => {
   const sec = $('sec-estadoDia');
   if (sec && sec.classList.contains('activa')) cargarEstadoDia();
 }, 300000);
+
+// ── Festivos ───────────────────────────────────────────────
+async function cargarFestivos() {
+  const año = $('festivosAño').value;
+  const festivos = await api('/api/admin/festivos?año=' + año);
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+  const diasHabilesMap = {};
+  for (let m = 1; m <= 12; m++) {
+    try {
+      const r = await api('/api/admin/dias-habiles?año=' + año + '&mes=' + m);
+      diasHabilesMap[m] = r.total;
+    } catch {}
+  }
+
+  const tbody = $('bodyFestivos');
+  if (!festivos.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--gris)">No hay festivos registrados para este año</td></tr>';
+  } else {
+    tbody.innerHTML = festivos.map(function(f) {
+      const mes = parseInt(f.fecha.slice(5, 7));
+      const nombreMes = meses[mes - 1];
+      const esNacional = f.tipo === 'nacional';
+      return '<tr>' +
+        '<td><strong>' + f.fecha + '</strong></td>' +
+        '<td>' + f.nombre + '</td>' +
+        '<td><span class="badge ' + (esNacional ? 'en_jornada' : 'en_pausa') + '" style="font-size:0.7rem">' + (esNacional ? 'Nacional' : 'Local') + '</span></td>' +
+        '<td style="color:var(--azul-osc)">' + (diasHabilesMap[mes] || '—') + ' días hábiles en ' + nombreMes + '</td>' +
+        '<td>' + (!esNacional ? '<button class="btn-sm btn-danger" style="font-size:0.75rem" onclick="borrarFestivo(' + f.id + ',\'' + esc(f.fecha) + '\')">Eliminar</button>' : '—') + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  const info = $('diasHabilesInfo');
+  const resumen = Object.entries(diasHabilesMap).map(function(e) {
+    return '<strong>' + meses[e[0]-1] + '</strong>: ' + e[1] + ' días';
+  }).join(' &nbsp;|&nbsp; ');
+  info.innerHTML = '<strong>Días hábiles ' + año + ':</strong><br>' + resumen;
+  info.style.display = 'block';
+}
+
+function abrirModalNuevoFestivo() {
+  $('ffFecha').value = '';
+  $('ffNombre').value = '';
+  hide('modalFestivoError');
+  abrirModal('modalFestivo');
+}
+
+async function guardarFestivo() {
+  const fecha = $('ffFecha').value;
+  const nombre = $('ffNombre').value.trim();
+  if (!fecha || !nombre) return showMsg('modalFestivoError','Fecha y nombre son obligatorios','error');
+  try {
+    await api('/api/admin/festivos', 'POST', { fecha: fecha, nombre: nombre });
+    cerrarModal('modalFestivo');
+    cargarFestivos();
+  } catch (e) { showMsg('modalFestivoError', e.message, 'error'); }
+}
+
+async function borrarFestivo(id, fecha) {
+  if (!confirm('¿Eliminar el festivo del ' + fecha + '?')) return;
+  try {
+    await api('/api/admin/festivos/' + id, 'DELETE');
+    cargarFestivos();
+  } catch (e) { alert(e.message); }
+}
 </script>
 </body>
 </html>
