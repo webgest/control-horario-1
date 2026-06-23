@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imprimir Carnets — Webgest</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --azul:    #1565C0;
+    --azul-osc:#0D47A1;
+    --verde:   #2E7D32;
+    --fondo:   #ECEFF1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--fondo); }
+
+  #loginScreen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+  }
+  .login-card {
+    background: #fff; border-radius: 14px; padding: 36px 32px;
+    width: 360px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .login-card h2 { text-align: center; margin-bottom: 24px; color: var(--azul-osc); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; color: #546E7A; margin-bottom: 5px;
+    font-weight: 600; text-transform: uppercase; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 10px 12px;
+    border: 2px solid #CFD8DC; border-radius: 8px; font-size: 0.95rem;
+    outline: none; font-family: inherit;
+  }
+  .form-group input:focus { border-color: var(--azul); }
+  .msg-error { background: #FFEBEE; color: #B71C1C; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; display: none; }
+
+  #mainScreen { display: none; }
+  .top-bar {
+    background: var(--azul-osc); color: #fff;
+    padding: 12px 24px; display: flex; justify-content: space-between;
+    align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .top-bar h1 { font-size: 1rem; }
+  .top-bar-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn { padding: 8px 18px; border-radius: 7px; border: none;
+    cursor: pointer; font-size: 0.88rem; font-weight: 600; }
+  .btn-primary { background: var(--azul); color: #fff; }
+  .btn-print   { background: var(--verde); color: #fff; }
+  .btn-gray    { background: #78909C; color: #fff; }
+  select.filter { padding: 8px 12px; border-radius: 7px; border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15); color: #fff; font-size: 0.88rem; }
+  select.filter option { background: #1E2A3A; color: #fff; }
+
+  .counter { font-size: 0.85rem; opacity: 0.75; }
+
+  .carnets-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px;
+    justify-content: flex-start;
+  }
+
+  .carnet {
+    width: 322px;
+    height: 204px;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #1976D2 100%);
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  .carnet::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .carnet::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .carnet-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .carnet-logo {
+    font-size: 0.65rem; font-weight: 700; opacity: 0.9;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+  .carnet-logo .webgest { font-size: 0.85rem; font-weight: 800; }
+  .carnet-logo .subtitulo { opacity: 0.7; }
+
+  .carnet-qr {
+    width: 72px; height: 72px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .carnet-qr img { width: 64px; height: 64px; display: block; }
+  .carnet-qr canvas { width: 64px !important; height: 64px !important; }
+
+  .carnet-info {
+    flex: 1;
+    padding-right: 12px;
+  }
+  .carnet-nombre {
+    font-size: 0.95rem; font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .carnet-empresa {
+    font-size: 0.62rem;
+    opacity: 0.75;
+    line-height: 1.4;
+    max-width: 200px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .carnet-dni {
+    font-size: 0.72rem; opacity: 0.8; font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .carnet-bottom {
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .carnet-instruccion {
+    font-size: 0.56rem; opacity: 0.65; max-width: 180px; line-height: 1.5;
+  }
+  .carnet-tipo {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; opacity: 0.6;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 7px; border-radius: 20px;
+  }
+
+  .loading {
+    text-align: center; padding: 60px; color: #546E7A; font-size: 1rem;
+  }
+  .spinner-lg {
+    border: 4px solid #CFD8DC; border-top-color: var(--azul);
+    border-radius: 50%; width: 44px; height: 44px;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media print {
+    body { background: #fff; }
+    .top-bar { display: none !important; }
+    #mainScreen { display: block !important; }
+    .carnets-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6mm;
+      padding: 8mm;
+    }
+    .carnet {
+      width: 85.6mm;
+      height: 53.98mm;
+      border-radius: 5mm;
+      padding: 3.5mm 4mm;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .carnet-qr { width: 19mm; height: 19mm; }
+    .carnet-qr canvas,
+    .carnet-qr img { width: 17mm !important; height: 17mm !important; }
+    .carnet-nombre { font-size: 3mm; }
+    .carnet-empresa { font-size: 1.8mm; }
+    .carnet-dni { font-size: 2mm; }
+    .carnet-logo .webgest { font-size: 2.8mm; }
+    .carnet-logo .subtitulo { font-size: 1.7mm; }
+    .carnet-instruccion { font-size: 1.5mm; }
+    .carnet-tipo { font-size: 1.5mm; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <h2>🖨️ Imprimir Carnets</h2>
+    <div class="msg-error" id="loginError"></div>
+    <div class="form-group"><label>Usuario</label>
+      <input type="text" id="lUser" autocomplete="username" placeholder="webgest">
+    </div>
+    <div class="form-group"><label>Contraseña</label>
+      <input type="password" id="lPass" autocomplete="current-password">
+    </div>
+    <button class="btn btn-primary" style="width:100%;padding:12px;font-size:1rem;margin-top:4px"
+            onclick="doLogin()">ENTRAR</button>
+  </div>
+</div>
+
+<div id="mainScreen">
+  <div class="top-bar">
+    <h1>🖨️ Carnets QR — Webgest</h1>
+    <div class="top-bar-right">
+      <select class="filter" id="filtroEmpresa" onchange="cargarCarnets()">
+        <option value="">Todas las empresas</option>
+      </select>
+      <span class="counter" id="contadorCarnets"></span>
+      <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="btn btn-gray" onclick="irAdmin()">← Admin</button>
+    </div>
+  </div>
+
+  <div id="carnetsGrid" class="carnets-grid">
+    <div class="loading">
+      <div class="spinner-lg"></div>
+      Cargando carnets...
+    </div>
+  </div>
+</div>
+
+<script>
+let TOKEN = sessionStorage.getItem('carnets_token') || null;
+const APP_URL = window.location.origin;
+
+async function api(url) {
+  const r = await fetch(url, {
+    headers: { 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }
+  });
+  if (r.status === 401) { TOKEN = null; sessionStorage.removeItem('carnets_token'); mostrarLogin(); throw new Error('Sesión expirada'); }
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || 'Error');
+  return data;
+}
+
+function mostrarLogin() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('mainScreen').style.display = 'none';
+}
+function mostrarPanel() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainScreen').style.display = 'block';
+}
+
+async function doLogin() {
+  const usuario = document.getElementById('lUser').value.trim();
+  const password = document.getElementById('lPass').value;
+  const errDiv = document.getElementById('loginError');
+  errDiv.style.display = 'none';
+  try {
+    const data = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuario, password })
+    }).then(r => r.json());
+    if (!data.token) throw new Error(data.error || 'Error de login');
+    TOKEN = data.token;
+    sessionStorage.setItem('carnets_token', TOKEN);
+    mostrarPanel();
+    await cargarEmpresas();
+    await cargarCarnets();
+  } catch (e) {
+    errDiv.textContent = e.message;
+    errDiv.style.display = 'block';
+  }
+}
+
+async function cargarEmpresas() {
+  try {
+    const empresas = await api('/api/admin/empresas');
+    const sel = document.getElementById('filtroEmpresa');
+    sel.innerHTML = '<option value="">Todas las empresas</option>';
+    empresas.forEach(e => {
+      const opt = document.createElement('option');
+      opt.value = e.id; opt.textContent = e.nombre;
+      sel.appendChild(opt);
+    });
+  } catch {}
+}
+
+function makeQRDataURL(codigo) {
+  return new Promise(resolve => {
+    const div = document.createElement('div');
+    div.style.position = 'absolute'; div.style.left = '-9999px';
+    document.body.appendChild(div);
+    const qr = new QRCode(div, {
+      text: `${APP_URL}/?carnet=${codigo}`,
+      width: 128, height: 128,
+      colorDark: '#0D47A1', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    setTimeout(() => {
+      const canvas = div.querySelector('canvas');
+      const img    = div.querySelector('img');
+      const src = canvas ? canvas.toDataURL('image/png') : (img ? img.src : '');
+      document.body.removeChild(div);
+      resolve(src);
+    }, 120);
+  });
+}
+
+async function cargarCarnets() {
+  const empresa_id = document.getElementById('filtroEmpresa').value;
+  const grid = document.getElementById('carnetsGrid');
+  grid.innerHTML = '<div class="loading"><div class="spinner-lg"></div>Generando carnets…</div>';
+
+  try {
+    const url = '/api/admin/carnets' + (empresa_id ? `?empresa_id=${empresa_id}` : '');
+    const trabajadoras = await api(url);
+
+    document.getElementById('contadorCarnets').textContent = `${trabajadoras.length} carnets`;
+
+    if (!trabajadoras.length) {
+      grid.innerHTML = '<div class="loading">No hay trabajadoras activas</div>';
+      return;
+    }
+
+    grid.innerHTML = '';
+
+    for (const t of trabajadoras) {
+      const nombreCompleto = `${t.apellidos}, ${t.nombre}`.trim().replace(/^,\s*/, '');
+      const qrSrc = t.codigo_carnet ? await makeQRDataURL(t.codigo_carnet) : '';
+      const hLabel = t.horas_dia >= 8 ? 'Jornada completa' : `${t.horas_dia}h/día`;
+
+      const card = document.createElement('div');
+      card.className = 'carnet';
+      card.innerHTML = `
+        <div class="carnet-top">
+          <div class="carnet-info">
+            <div class="carnet-logo">
+              <div class="webgest">WEBGEST</div>
+              <div class="subtitulo">Control Horario</div>
+            </div>
+            <div style="margin-top:10px">
+              <div class="carnet-nombre">${escH(nombreCompleto)}</div>
+              <div class="carnet-empresa">${escH(t.empresa_nombre)}</div>
+              <div class="carnet-dni">${escH(t.dni)}</div>
+            </div>
+          </div>
+          <div class="carnet-qr">
+            ${qrSrc ? `<img src="${qrSrc}" alt="QR">` : '<span style="font-size:9px;color:#999">Sin QR</span>'}
+          </div>
+        </div>
+        <div class="carnet-bottom">
+          <div class="carnet-instruccion">Escanea el QR para fichar tu jornada</div>
+          <div class="carnet-tipo">${escH(hLabel)}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+  } catch (e) {
+    grid.innerHTML = `<div class="loading" style="color:#B71C1C">Error: ${e.message}</div>`;
+  }
+}
+
+function escH(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function irAdmin() {
+  window.location.href = '/admin.html';
+}
+
+// Soporte Enter en login
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
+});
+
+// Inicializar
+if (TOKEN) {
+  mostrarPanel();
+  cargarEmpresas().then(() => cargarCarnets());
+} else {
+  mostrarLogin();
+}
+</script>
+</body>
+</html>
