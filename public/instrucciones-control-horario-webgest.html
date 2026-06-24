@@ -26,6 +26,7 @@
     border-radius: 8px;
   }
 
+  /* PORTADA */
   .portada {
     text-align: center;
     padding: 40px 0 30px;
@@ -45,6 +46,7 @@
     color: #555;
     margin-bottom: 28px;
   }
+
   .caja-acceso {
     background: #1F4E79;
     color: #fff;
@@ -72,6 +74,8 @@
   .caja-acceso .row .label { opacity: 0.7; min-width: 90px; }
   .caja-acceso .row .val { font-weight: 600; color: #9DC3E6; word-break: break-all; }
   .caja-acceso .row .val.cred { color: #fff; font-size: 14px; }
+
+  /* INDICE */
   .indice {
     background: #F8FBFF;
     border: 1px solid #D5E8F0;
@@ -84,6 +88,8 @@
   .indice li { margin-bottom: 4px; font-size: 12px; color: #333; }
   .indice a { color: #2E75B6; text-decoration: none; }
   .indice a:hover { text-decoration: underline; }
+
+  /* SECCIONES */
   h2.seccion {
     font-size: 18px;
     font-weight: 700;
@@ -109,6 +115,7 @@
     font-weight: 700;
     flex-shrink: 0;
   }
+
   h3.sub {
     font-size: 14px;
     font-weight: 600;
@@ -116,11 +123,16 @@
     margin-top: 20px;
     margin-bottom: 8px;
   }
+
   p { margin-bottom: 10px; line-height: 1.6; }
+
   ul { padding-left: 20px; margin-bottom: 10px; }
   ul li { margin-bottom: 5px; line-height: 1.6; }
+
   ol.pasos { padding-left: 22px; margin-bottom: 10px; }
   ol.pasos li { margin-bottom: 7px; line-height: 1.6; }
+
+  /* NOTAS */
   .nota {
     background: #FFF8E1;
     border-left: 4px solid #F9A825;
@@ -131,6 +143,7 @@
     color: #5D4037;
   }
   .nota strong { color: #E65100; }
+
   .info {
     background: #E8F4FD;
     border-left: 4px solid #2E75B6;
@@ -140,6 +153,8 @@
     font-size: 12.5px;
     color: #1a3a5c;
   }
+
+  /* TABLA ESTADOS */
   .tabla-estados {
     width: 100%;
     border-collapse: collapse;
@@ -158,6 +173,8 @@
     border-bottom: 1px solid #E0E0E0;
   }
   .tabla-estados tr:nth-child(even) td { background: #F7F9FC; }
+
+  /* BADGES */
   .badge {
     display: inline-block;
     padding: 2px 10px;
@@ -171,6 +188,8 @@
   .badge.azul { background: #E3F2FD; color: #1565C0; }
   .badge.rojo { background: #FFEBEE; color: #C62828; }
   .badge.morado { background: #F3E5F5; color: #6A1B9A; }
+
+  /* CAJA CREDENCIALES */
   .caja-credenciales {
     background: #E8F4FD;
     border: 1px solid #BBDEFB;
@@ -182,6 +201,8 @@
   }
   .caja-credenciales .line { margin-bottom: 4px; }
   .caja-credenciales strong { color: #1565C0; }
+
+  /* URL */
   .url-box {
     background: #F3F4F6;
     border: 1px solid #D1D5DB;
@@ -193,6 +214,8 @@
     color: #0563C1;
     word-break: break-all;
   }
+
+  /* PIE */
   .pie {
     text-align: center;
     margin-top: 50px;
@@ -202,6 +225,8 @@
     color: #888;
   }
   .pie strong { color: #2E75B6; }
+
+  /* PRINT */
   @media print {
     body { background: white; padding: 0; }
     .page { box-shadow: none; border-radius: 0; padding: 20mm 18mm; max-width: 100%; }
@@ -214,20 +239,34 @@
 </head>
 <body>
 <div class="page">
+
+  <!-- PORTADA -->
   <div class="portada">
-    <div class="icono">&#x23F1;</div>
+    <div class="icono">&#9201;</div>
     <h1>CONTROL HORARIO</h1>
     <p class="subtitulo">Manual de uso &mdash; Panel de Administraci&oacute;n Webgest</p>
     <div class="caja-acceso">
       <div class="caja-titulo">Acceso al sistema</div>
-      <div class="row"><span class="label">&#x1F517; Panel fichaje:</span><span class="val">https://control-horario-production-e57a.up.railway.app</span></div>
-      <div class="row"><span class="label">&#x1F510; Panel admin:</span><span class="val">.../admin.html</span></div>
-      <div class="row" style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.2);padding-top:10px">
-        <span class="label">Usuario:</span><span class="val cred">webgest</span>
+      <div class="row">
+        <span class="label">&#128279; Panel fichaje:</span>
+        <span class="val">https://control-horario-production-e57a.up.railway.app</span>
       </div>
-      <div class="row"><span class="label">Contrase&ntilde;a:</span><span class="val cred">Webgest2026!</span></div>
+      <div class="row">
+        <span class="label">&#128272; Panel admin:</span>
+        <span class="val">.../admin.html</span>
+      </div>
+      <div class="row" style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.2);padding-top:10px">
+        <span class="label">Usuario:</span>
+        <span class="val cred">webgest</span>
+      </div>
+      <div class="row">
+        <span class="label">Contrase&ntilde;a:</span>
+        <span class="val cred">Webgest2026!</span>
+      </div>
     </div>
   </div>
+
+  <!-- INDICE -->
   <div class="indice">
     <h3>&Iacute;ndice</h3>
     <ol>
@@ -243,10 +282,14 @@
       <li><a href="#sec10">Alertas &mdash; Trabajadoras sin fichar</a></li>
       <li><a href="#sec11">&iquest;C&oacute;mo ficha la trabajadora?</a></li>
       <li><a href="#sec12">Preguntas frecuentes</a></li>
+      <li><a href="#sec13">Calendario de festivos</a></li>
+      <li><a href="#sec14">Imprimir carnets QR (todos a la vez)</a></li>
     </ol>
   </div>
+
+  <!-- 1 -->
   <h2 class="seccion" id="sec1"><span class="num">1</span> &iquest;Qu&eacute; es y para qu&eacute; sirve?</h2>
-  <p>Control Horario gestiona el fichaje de todas las trabajadoras de las empresas de limpieza administradas por Webgest. Cumple con el <strong>RD-ley 8/2019 (art. 34.9 ET)</strong> de registro diario de jornada.</p>
+  <p>Control Horario es la aplicaci&oacute;n que gestiona el fichaje de todas las trabajadoras de las empresas de limpieza administradas por Webgest. Cumple con el <strong>RD-ley 8/2019 (art. 34.9 ET)</strong> de registro diario de jornada.</p>
   <p>Desde el panel de administraci&oacute;n pod&eacute;is:</p>
   <ul>
     <li>Ver en tiempo real qui&eacute;n est&aacute; trabajando, en pausa o ha terminado su jornada.</li>
@@ -256,22 +299,30 @@
     <li>Generar el PDF oficial del Registro de Jornada para inspecciones o para la trabajadora.</li>
     <li>Ver alertas de trabajadoras activas que no han fichado en el d&iacute;a.</li>
     <li>Generar y entregar los c&oacute;digos QR de acceso r&aacute;pido (carnet) a cada trabajadora.</li>
+    <li>Gestionar el calendario de festivos nacionales y locales que afectan al c&aacute;lculo de horas.</li>
+    <li>Imprimir de una sola vez los carnets QR de todas las trabajadoras en formato tarjeta de cr&eacute;dito.</li>
   </ul>
 
+  <!-- 2 -->
   <h2 class="seccion" id="sec2"><span class="num">2</span> C&oacute;mo acceder al panel de administraci&oacute;n</h2>
   <p>Abrir el navegador y entrar en:</p>
-  <div class="url-box">https://control-horario-production-e57a.up.railway.app/admin.html</div>
-  <p>Tambi&eacute;n hay un acceso directo en el escritorio: <strong>&laquo;Control Horario - ADMIN&raquo;</strong>.</p>
+  <div class="url-box">&#128279; https://control-horario-production-e57a.up.railway.app/admin.html</div>
+  <p>Tambi&eacute;n hay un acceso directo en el escritorio del ordenador: <strong>&laquo;Control Horario - ADMIN&raquo;</strong>.</p>
   <div class="caja-credenciales">
-    <div class="line"><strong>Usuario:</strong> webgest</div>
+    <div class="line"><strong>Usuario:</strong>    webgest</div>
     <div class="line"><strong>Contrase&ntilde;a:</strong> Webgest2026!</div>
   </div>
-  <div class="nota"><strong>IMPORTANTE:</strong> No compartir estas credenciales con las trabajadoras. Ellas acceden por su propio sistema (DNI + PIN o c&oacute;digo QR).</div>
+  <div class="nota">
+    <strong>&#9888;&#65039; IMPORTANTE:</strong> No compartir estas credenciales con las trabajadoras. Ellas acceden por su propio sistema (DNI + PIN o c&oacute;digo QR).
+  </div>
 
+  <!-- 3 -->
   <h2 class="seccion" id="sec3"><span class="num">3</span> Pantalla principal &mdash; Estado del d&iacute;a</h2>
-  <p>Al iniciar sesi&oacute;n aparece el <strong>Estado del d&iacute;a</strong>. Muestra todas las trabajadoras activas con su situaci&oacute;n en tiempo real.</p>
+  <p>Al iniciar sesi&oacute;n aparece el <strong>Estado del d&iacute;a</strong>. Es la pantalla m&aacute;s usada: muestra en una tabla todas las trabajadoras activas con su situaci&oacute;n en tiempo real.</p>
   <table class="tabla-estados">
-    <thead><tr><th>Estado</th><th>Significado</th><th>Indicador</th></tr></thead>
+    <thead>
+      <tr><th>Estado</th><th>Significado</th><th>Indicador</th></tr>
+    </thead>
     <tbody>
       <tr><td><span class="badge gris">Sin fichar</span></td><td>A&uacute;n no ha iniciado jornada hoy</td><td>Gris</td></tr>
       <tr><td><span class="badge verde">En jornada</span></td><td>Trabajando en este momento</td><td>Verde</td></tr>
@@ -282,146 +333,240 @@
       <tr><td><span class="badge morado">Vacaciones</span></td><td>En per&iacute;odo vacacional</td><td>Morado</td></tr>
     </tbody>
   </table>
-  <p>Usar el desplegable superior para <strong>filtrar por empresa</strong>. Pulsar &laquo;Actualizar&raquo; para refrescar.</p>
-  <div class="nota"><strong>NOTA:</strong> El sistema cierra autom&aacute;ticamente la jornada cuando se cumplen las horas contratadas, aunque la trabajadora no pulse &laquo;Finalizar&raquo;. Aparece con &#x26A1; en el historial.</div>
+  <p>En la parte superior hay un desplegable para <strong>filtrar por empresa</strong>. Pulsar &laquo;&#128260; Actualizar&raquo; para refrescar los datos.</p>
+  <div class="nota">
+    <strong>&#9888;&#65039; NOTA:</strong> El sistema cierra autom&aacute;ticamente la jornada de cualquier trabajadora que haya cumplido sus horas contratadas, aunque no haya pulsado &laquo;Finalizar&raquo;. Aparece con el s&iacute;mbolo &#9889; en el historial de fichajes.
+  </div>
 
+  <!-- 4 -->
   <h2 class="seccion" id="sec4"><span class="num">4</span> Fichajes &mdash; Consultar y corregir</h2>
-  <p>Men&uacute; lateral &rarr; <strong>&laquo;Fichajes&raquo;</strong>. Filtros por empresa, trabajadora y rango de fechas.</p>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#128203; Fichajes&raquo;</strong>. Aqu&iacute; se ven todos los registros con filtros por empresa, trabajadora y rango de fechas.</p>
+
   <h3 class="sub">4.1 C&oacute;mo filtrar</h3>
   <ul>
-    <li>Seleccionar empresa en el primer desplegable.</li>
-    <li>Al seleccionar empresa, aparecen sus trabajadoras en el siguiente desplegable.</li>
+    <li>Seleccionar la empresa en el primer desplegable.</li>
+    <li>Al seleccionar empresa, se cargan las trabajadoras de esa empresa en el siguiente desplegable.</li>
     <li>Opcionalmente poner fechas &laquo;Desde&raquo; y &laquo;Hasta&raquo;.</li>
-    <li>Pulsar &laquo;Buscar&raquo;.</li>
+    <li>Pulsar &laquo;Buscar&raquo; para ver los resultados.</li>
   </ul>
+
   <h3 class="sub">4.2 Corregir un fichaje</h3>
-  <p>Solo Webgest puede modificar registros. Cada modificaci&oacute;n queda registrada con el motivo, fecha y usuario.</p>
+  <p>Solo el equipo de Webgest puede modificar registros (obligatorio por ley). Cada modificaci&oacute;n queda registrada con el motivo, la fecha y el usuario que la hizo.</p>
   <ol class="pasos">
-    <li>Localizar el fichaje con los filtros.</li>
-    <li>Pulsar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> en la fila.</li>
+    <li>Localizar el fichaje usando los filtros.</li>
+    <li>Pulsar el bot&oacute;n <strong>&laquo;&#9999;&#65039; Editar&raquo;</strong> en la fila correspondiente.</li>
     <li>Introducir la hora de entrada y/o salida en <strong>hora de Madrid</strong> (formato HH:MM).</li>
-    <li>Rellenar <strong>obligatoriamente</strong> el campo &laquo;Motivo de modificaci&oacute;n&raquo;.</li>
+    <li>Rellenar <strong>obligatoriamente</strong> el campo &laquo;Motivo de modificaci&oacute;n&raquo; (ej: &laquo;Error de fichaje&raquo;, &laquo;Olvido salida&raquo;).</li>
     <li>Pulsar &laquo;Guardar&raquo;.</li>
   </ol>
-  <div class="info">Las horas se introducen en hora de Madrid. El sistema las convierte autom&aacute;ticamente de forma interna.</div>
+  <div class="info">
+    &#128161; Las horas se introducen siempre en hora de Madrid. El sistema las convierte autom&aacute;ticamente de forma interna.
+  </div>
 
+  <!-- 5 -->
   <h2 class="seccion" id="sec5"><span class="num">5</span> Gesti&oacute;n de trabajadoras</h2>
-  <p>Men&uacute; lateral &rarr; <strong>&laquo;Trabajadoras&raquo;</strong>. Se puede filtrar por empresa.</p>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#128101; Trabajadoras&raquo;</strong>. Se puede filtrar por empresa.</p>
+
   <h3 class="sub">5.1 Alta de nueva trabajadora</h3>
   <ol class="pasos">
-    <li>Pulsar <strong>&laquo;+ Nueva&raquo;</strong> en la parte superior derecha.</li>
-    <li>Rellenar: Empresa, Apellidos, Nombre, DNI, PIN (4 d&iacute;gitos), Horas/d&iacute;a, D&iacute;as/mes, Tel&eacute;fono y Situaci&oacute;n.</li>
-    <li>El PIN es la contrase&ntilde;a personal de la trabajadora para el panel de fichaje.</li>
+    <li>Pulsar el bot&oacute;n <strong>&laquo;+ Nueva&raquo;</strong> en la parte superior derecha.</li>
+    <li>Rellenar: Empresa, Apellidos, Nombre, DNI, PIN (4 d&iacute;gitos), Horas/d&iacute;a, D&iacute;as/mes, Tel&eacute;fono (para SMS) y Situaci&oacute;n.</li>
+    <li>El PIN es la contrase&ntilde;a personal de la trabajadora para acceder al panel de fichaje.</li>
     <li>Pulsar &laquo;Guardar&raquo;.</li>
   </ol>
-  <h3 class="sub">5.2 Modificar datos</h3>
+
+  <h3 class="sub">5.2 Modificar datos de una trabajadora</h3>
   <ol class="pasos">
-    <li>Pulsar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> en su fila.</li>
-    <li>Cambiar los campos necesarios (dejar PIN en blanco si no se quiere modificar).</li>
+    <li>Pulsar <strong>&laquo;&#9999;&#65039; Editar&raquo;</strong> en la fila de la trabajadora.</li>
+    <li>Cambiar los campos necesarios (dejar el PIN en blanco si no se quiere modificar).</li>
     <li>Pulsar &laquo;Guardar&raquo;.</li>
   </ol>
-  <h3 class="sub">5.3 Dar de baja</h3>
+
+  <h3 class="sub">5.3 Dar de baja a una trabajadora</h3>
   <ol class="pasos">
-    <li>Pulsar <strong>&laquo;Baja&raquo;</strong> en la fila y confirmar. La trabajadora no podr&aacute; fichar.</li>
+    <li>Pulsar <strong>&laquo;Baja&raquo;</strong> en la fila de la trabajadora.</li>
+    <li>Confirmar. La trabajadora quedar&aacute; marcada como &laquo;Baja&raquo; y no podr&aacute; fichar.</li>
   </ol>
+
   <h3 class="sub">5.4 Cambiar situaci&oacute;n (IT, vacaciones&hellip;)</h3>
-  <p>Usar <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> y cambiar el campo <em>Situaci&oacute;n</em>:</p>
+  <p>Usar <strong>&laquo;&#9999;&#65039; Editar&raquo;</strong> y cambiar el campo <em>Situaci&oacute;n</em>:</p>
   <ul>
     <li><strong>activa</strong> &rarr; trabaja con normalidad.</li>
-    <li><strong>it</strong> &rarr; Incapacidad Temporal; no puede fichar ni aparece en alertas.</li>
-    <li><strong>vacaciones</strong> &rarr; no aparece en alertas de &laquo;sin fichar&raquo;.</li>
+    <li><strong>it</strong> &rarr; Incapacidad Temporal; no puede fichar y no aparece en alertas.</li>
+    <li><strong>vacaciones</strong> &rarr; no aparece en las alertas de &laquo;sin fichar&raquo;.</li>
     <li><strong>baja</strong> &rarr; baja laboral definitiva.</li>
   </ul>
 
+  <!-- 6 -->
   <h2 class="seccion" id="sec6"><span class="num">6</span> Gesti&oacute;n de empresas</h2>
-  <p>Men&uacute; lateral &rarr; <strong>&laquo;Empresas&raquo;</strong>. Crear nuevas empresas o modificar datos (nombre, NIF/CIF, CCC).</p>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#127970; Empresas&raquo;</strong>. Permite crear nuevas empresas o modificar los datos (nombre, NIF/CIF, CCC) de las existentes.</p>
   <ul>
-    <li><strong>&laquo;+ Nueva&raquo;</strong> para crear una empresa.</li>
-    <li><strong>&laquo;Editar&raquo;</strong> para modificar nombre, NIF o CCC.</li>
-    <li><strong>&laquo;Dar de baja&raquo;</strong> para desactivarla.</li>
+    <li>Pulsar <strong>&laquo;+ Nueva&raquo;</strong> para crear una empresa nueva.</li>
+    <li>Pulsar <strong>&laquo;Editar&raquo;</strong> para modificar nombre, NIF o CCC.</li>
+    <li>Pulsar <strong>&laquo;Dar de baja&raquo;</strong> para desactivar una empresa (no aparecer&aacute; en los listados activos).</li>
   </ul>
 
-  <h2 class="seccion" id="sec7"><span class="num">7</span> C&oacute;digos QR &mdash; Carnet de acceso</h2>
-  <p>Cada trabajadora tiene un <strong>c&oacute;digo QR &uacute;nico</strong> para acceder sin teclear DNI ni PIN. Ideal para imprimir o enviar por WhatsApp.</p>
-  <h3 class="sub">7.1 Ver y entregar el QR</h3>
-  <ol class="pasos">
-    <li>Ir a <strong>&laquo;Trabajadoras&raquo;</strong>.</li>
-    <li>Pulsar <strong>&laquo;QR&raquo;</strong> en la fila de la trabajadora.</li>
-    <li>Se abre la ventana con el QR y la URL de acceso directo.</li>
-    <li>Pulsar <strong>&laquo;Copiar URL&raquo;</strong> para enviarla por WhatsApp, o capturar el QR para imprimirlo.</li>
-  </ol>
-  <h3 class="sub">7.2 Regenerar el QR</h3>
-  <p>En la ventana del QR, pulsar <strong>&laquo;Regenerar&raquo;</strong>. El c&oacute;digo anterior queda invalidado y se genera uno nuevo.</p>
-  <h3 class="sub">7.3 Ver el panel de la trabajadora</h3>
-  <p>El bot&oacute;n <strong>&laquo;Panel&raquo;</strong> abre el panel de fichaje de esa trabajadora en una nueva pesta&ntilde;a.</p>
+  <!-- 7 -->
+  <h2 class="seccion" id="sec7"><span class="num">7</span> C&oacute;digos QR &mdash; Carnet de acceso para trabajadoras</h2>
+  <p>Cada trabajadora tiene un <strong>c&oacute;digo QR &uacute;nico</strong> que le permite acceder al panel de fichaje sin teclear su DNI ni PIN. Es ideal para imprimir y entregarl&eacute;slo en papel, o enviarselo por WhatsApp.</p>
 
+  <h3 class="sub">7.1 Ver y entregar el QR de una trabajadora</h3>
+  <ol class="pasos">
+    <li>Ir a <strong>&laquo;&#128101; Trabajadoras&raquo;</strong>.</li>
+    <li>Pulsar <strong>&laquo;&#128241; QR&raquo;</strong> en la fila de la trabajadora.</li>
+    <li>Se abre una ventana con el c&oacute;digo QR y la URL de acceso directo.</li>
+    <li>Pulsar <strong>&laquo;&#128203; Copiar URL&raquo;</strong> para enviarsela por WhatsApp, o hacer una captura del QR para imprimirlo.</li>
+  </ol>
+
+  <h3 class="sub">7.2 Regenerar el QR (si se pierde o hay que invalidarlo)</h3>
+  <p>En la ventana del QR, pulsar <strong>&laquo;&#128260; Regenerar&raquo;</strong>. El c&oacute;digo anterior queda invalidado de inmediato y se genera uno nuevo.</p>
+
+  <h3 class="sub">7.3 Ver el panel de la trabajadora directamente</h3>
+  <p>Desde <strong>&laquo;&#128101; Trabajadoras&raquo;</strong>, el bot&oacute;n <strong>&laquo;&#128065; Panel&raquo;</strong> abre el panel de fichaje de esa trabajadora en una nueva pesta&ntilde;a, exactamente como lo ve ella.</p>
+
+  <h3 class="sub">7.4 Imprimir todos los carnets QR de una vez</h3>
+  <p>Para imprimir los carnets de todas las trabajadoras en formato tarjeta de cr&eacute;dito, ir a <strong>&laquo;&#128424;&#65039; Imprimir Carnets&raquo;</strong> en el men&uacute; lateral, o acceder directamente a <code>/carnets.html</code>. Ver secci&oacute;n 14 para m&aacute;s detalle.</p>
+
+  <!-- 8 -->
   <h2 class="seccion" id="sec8"><span class="num">8</span> Tabl&oacute;n de comunicaciones</h2>
-  <p>El Tabl&oacute;n publica <strong>mensajes informativos</strong> para cada trabajadora. Ella los ve en su panel (pesta&ntilde;a &laquo;Tabl&oacute;n&raquo;) pero no puede responder. &Uacute;til para:</p>
+  <p>El Tabl&oacute;n permite publicar <strong>mensajes informativos</strong> para cada trabajadora. La trabajadora los ve en su panel (pesta&ntilde;a &laquo;Tabl&oacute;n&raquo;) pero no puede responder. Es ideal para comunicar:</p>
   <ul>
     <li>Centros de trabajo asignados y direcciones.</li>
     <li>Cambios de horario o instrucciones especiales.</li>
     <li>Cualquier informaci&oacute;n que necesite tener a mano.</li>
   </ul>
+
   <h3 class="sub">8.1 Publicar un mensaje</h3>
   <ol class="pasos">
-    <li>Ir a <strong>&laquo;Tabl&oacute;n&raquo;</strong> en el men&uacute; lateral.</li>
-    <li>Seleccionar la empresa y la trabajadora.</li>
+    <li>Ir a <strong>&laquo;&#128204; Tabl&oacute;n&raquo;</strong> en el men&uacute; lateral.</li>
+    <li>Seleccionar la empresa y luego la trabajadora.</li>
     <li>Pulsar <strong>&laquo;+ Nuevo mensaje&raquo;</strong>.</li>
-    <li>Escribir t&iacute;tulo y contenido, luego &laquo;Publicar&raquo;.</li>
+    <li>Escribir el t&iacute;tulo y el contenido, luego pulsar &laquo;Publicar&raquo;.</li>
   </ol>
-  <div class="info">Desde <strong>&laquo;Trabajadoras&raquo;</strong>, el bot&oacute;n <strong>&laquo;Tabl&oacute;n&raquo;</strong> lleva directamente al tabl&oacute;n de esa trabajadora.</div>
+  <div class="info">
+    &#128161; Desde <strong>&laquo;&#128101; Trabajadoras&raquo;</strong>, el bot&oacute;n <strong>&laquo;&#128204; Tabl&oacute;n&raquo;</strong> lleva directamente al tabl&oacute;n de esa trabajadora sin tener que buscarla.
+  </div>
+
   <h3 class="sub">8.2 Editar o eliminar un mensaje</h3>
-  <p>Cada mensaje tiene los botones <strong>&laquo;&#x270F;&#xFE0F; Editar&raquo;</strong> y <strong>&laquo;&#x1F5D1; Eliminar&raquo;</strong>.</p>
+  <p>En la lista de mensajes del tabl&oacute;n de una trabajadora, cada mensaje tiene los botones <strong>&laquo;&#9999;&#65039; Editar&raquo;</strong> y <strong>&laquo;&#128465; Eliminar&raquo;</strong>.</p>
 
+  <!-- 9 -->
   <h2 class="seccion" id="sec9"><span class="num">9</span> Exportar el Registro de Jornada (PDF)</h2>
-  <p>El PDF cumple el formato del <strong>RD-ley 8/2019</strong> para inspecciones (ITSS), la trabajadora o su representante.</p>
+  <p>El PDF generado cumple el formato exigido por el <strong>RD-ley 8/2019</strong> y puede entregarse a la trabajadora, a su representante legal o a la Inspecci&oacute;n de Trabajo (ITSS). Incluye un <strong>bloque de firma</strong> para que tanto la trabajadora como la empresa (Webgest) firmen la conformidad del registro mensual.</p>
   <ol class="pasos">
-    <li>Ir a <strong>&laquo;Exportar PDF&raquo;</strong> en el men&uacute; lateral.</li>
-    <li>Seleccionar empresa, trabajadora y mes.</li>
-    <li>Pulsar <strong>&laquo;Descargar PDF&raquo;</strong>. Se abre en nueva pesta&ntilde;a lista para imprimir o guardar.</li>
+    <li>Ir a <strong>&laquo;&#128196; Exportar PDF&raquo;</strong> en el men&uacute; lateral.</li>
+    <li>Seleccionar la empresa.</li>
+    <li>Seleccionar la trabajadora.</li>
+    <li>Seleccionar el mes (si se deja en blanco, usa el mes en curso).</li>
+    <li>Pulsar <strong>&laquo;&#128229; Descargar PDF&raquo;</strong>. Se abre en una nueva pesta&ntilde;a lista para imprimir o guardar.</li>
   </ol>
 
+  <!-- 10 -->
   <h2 class="seccion" id="sec10"><span class="num">10</span> Alertas &mdash; Trabajadoras sin fichar</h2>
-  <p>Men&uacute; lateral &rarr; <strong>&laquo;Alertas&raquo;</strong>. Lista de trabajadoras activas que <strong>no han fichado hoy</strong>.</p>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#128276; Alertas&raquo;</strong>. Muestra la lista de trabajadoras activas que <strong>no han fichado entrada hoy</strong>.</p>
   <ul>
     <li>No aparecen las que est&aacute;n en IT, baja o vacaciones.</li>
-    <li>Pulsar &laquo;Actualizar&raquo; para refrescar.</li>
-    <li>&Uacute;til para detectar ausencias no comunicadas.</li>
+    <li>Pulsar &laquo;&#128260; Actualizar&raquo; para refrescar la lista.</li>
+    <li>&Uacute;til para detectar ausencias no comunicadas y contactar con la trabajadora.</li>
   </ul>
 
-  <h2 class="seccion" id="sec11"><span class="num">11</span> &iquest;C&oacute;mo ficha la trabajadora?</h2>
-  <p>Acceden desde su m&oacute;vil o cualquier navegador. Dos formas:</p>
+  <!-- 11 -->
+  <h2 class="seccion" id="sec11"><span class="num">11</span> &iquest;C&oacute;mo ficha la trabajadora? (para referencia)</h2>
+  <p>Las trabajadoras acceden desde su m&oacute;vil o cualquier navegador. Hay dos formas:</p>
+
   <h3 class="sub">Opci&oacute;n A &mdash; Con DNI y PIN</h3>
   <p>Entrar en la URL del panel e introducir DNI y PIN de 4 d&iacute;gitos.</p>
+
   <h3 class="sub">Opci&oacute;n B &mdash; Con el c&oacute;digo QR (recomendado)</h3>
-  <p>Escanear el QR con la c&aacute;mara del m&oacute;vil, o pulsar el enlace enviado por WhatsApp. Inicia sesi&oacute;n autom&aacute;ticamente.</p>
+  <p>Escanear el QR con la c&aacute;mara del m&oacute;vil, o pulsar el enlace enviado por WhatsApp. El sistema inicia sesi&oacute;n autom&aacute;ticamente sin necesidad de teclear nada.</p>
+
   <p>Una vez dentro, la trabajadora ve un &uacute;nico bot&oacute;n grande seg&uacute;n su estado:</p>
   <ul>
     <li><strong>FICHAR ENTRADA</strong> &rarr; inicia la jornada. Se muestra la hora de fin prevista.</li>
-    <li><strong>PAUSAR JORNADA</strong> &rarr; pausa el tiempo (el tiempo en pausa no cuenta como trabajado).</li>
+    <li><strong>PAUSAR JORNADA</strong> &rarr; pausa el tiempo (el tiempo en pausa no cuenta como trabajado; la jornada se extiende ese tiempo).</li>
     <li><strong>REANUDAR JORNADA</strong> &rarr; reanuda tras la pausa.</li>
     <li><strong>FINALIZAR JORNADA</strong> &rarr; cierra la jornada del d&iacute;a.</li>
   </ul>
-  <div class="nota"><strong>NOTA:</strong> Cuando una trabajadora ha cumplido sus horas contratadas, el sistema cierra la jornada autom&aacute;ticamente aunque no pulse &laquo;Finalizar&raquo;. Ve el mensaje: <em>&laquo;Tu jornada laboral ha finalizado. No puedes seguir trabajando. &iexcl;Que descanses! Si tiene alguna duda, llame al 655 588 770.&raquo;</em></div>
-
-  <h2 class="seccion" id="sec12"><span class="num">12</span> Preguntas frecuentes</h2>
-  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora olvid&oacute; fichar la salida?</h3>
-  <p>Ir a <strong>&laquo;Fichajes&raquo;</strong>, localizar el registro, pulsar <strong>&laquo;Editar&raquo;</strong>, poner la hora de salida correcta, rellenar el motivo y guardar.</p>
-  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora est&aacute; de IT y no debe fichar?</h3>
-  <p>Ir a <strong>&laquo;Trabajadoras&raquo;</strong>, editar a la trabajadora y cambiar su situaci&oacute;n a <strong>&laquo;IT&raquo;</strong>. No aparecer&aacute; en alertas ni podr&aacute; fichar.</p>
-  <h3 class="sub">&iquest;Puedo ver el historial de un mes anterior?</h3>
-  <p>S&iacute;. En <strong>&laquo;Fichajes&raquo;</strong>, usar los filtros de fecha &laquo;Desde&raquo; y &laquo;Hasta&raquo;.</p>
-  <h3 class="sub">La trabajadora dice que su hora no es correcta, &iquest;qu&eacute; hago?</h3>
-  <p>El sistema muestra siempre hora de Madrid. Si hay discrepancia real, revisar el fichaje y corregirlo con motivo.</p>
-  <h3 class="sub">&iquest;C&oacute;mo s&eacute; si el sistema est&aacute; funcionando bien?</h3>
-  <p>En <strong>&laquo;Estado del d&iacute;a&raquo;</strong> deber&iacute;an verse las trabajadoras activas. Si no carga, verificar conexi&oacute;n a Internet. El sistema est&aacute; en Railway con disponibilidad 24/7.</p>
-  <h3 class="sub">&iquest;Puedo acceder desde el m&oacute;vil?</h3>
-  <p>S&iacute;, el panel admin funciona en m&oacute;vil aunque est&aacute; optimizado para ordenador.</p>
-
-  <div class="pie">
-    <p>Para consultas t&eacute;cnicas: <strong>ia@webgest.net</strong></p>
-    <p style="margin-top:6px;font-size:11px">Webgest &copy; 2026 &mdash; Control Horario v1.0</p>
+  <div class="nota">
+    <strong>&#9888;&#65039; NOTA:</strong> Cuando una trabajadora ha cumplido sus horas contratadas, el sistema cierra la jornada autom&aacute;ticamente aunque no pulse &laquo;Finalizar&raquo;. La trabajadora ve el mensaje: <em>&laquo;Tu jornada laboral ha finalizado. No puedes seguir trabajando. &iexcl;Que descanses! Si tiene alguna duda o sugerencia, llame al 655&nbsp;588&nbsp;770.&raquo;</em>
   </div>
+
+  <!-- 12 -->
+  <h2 class="seccion" id="sec12"><span class="num">12</span> Preguntas frecuentes</h2>
+
+  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora olvid&oacute; fichar la salida?</h3>
+  <p>Ir a <strong>&laquo;&#128203; Fichajes&raquo;</strong>, localizar el registro de ese d&iacute;a, pulsar <strong>&laquo;&#9999;&#65039; Editar&raquo;</strong>, poner la hora de salida correcta, rellenar el motivo y guardar.</p>
+
+  <h3 class="sub">&iquest;Qu&eacute; hago si una trabajadora est&aacute; de IT y no debe fichar?</h3>
+  <p>Ir a <strong>&laquo;&#128101; Trabajadoras&raquo;</strong>, editar a la trabajadora y cambiar su situaci&oacute;n a <strong>&laquo;IT&raquo;</strong>. No aparecer&aacute; en las alertas ni podr&aacute; fichar mientras est&eacute; en esa situaci&oacute;n.</p>
+
+  <h3 class="sub">&iquest;Puedo ver el historial de un mes anterior?</h3>
+  <p>S&iacute;. En <strong>&laquo;&#128203; Fichajes&raquo;</strong>, usar los filtros de fecha &laquo;Desde&raquo; y &laquo;Hasta&raquo; para consultar cualquier per&iacute;odo.</p>
+
+  <h3 class="sub">La trabajadora dice que su hora no es correcta, &iquest;qu&eacute; hago?</h3>
+  <p>El sistema siempre muestra la hora de Madrid (hora espa&ntilde;ola). Si hay discrepancia real, revisar el fichaje y corregirlo con el motivo adecuado.</p>
+
+  <h3 class="sub">&iquest;C&oacute;mo s&eacute; si el sistema est&aacute; funcionando bien?</h3>
+  <p>En <strong>&laquo;&#128202; Estado del d&iacute;a&raquo;</strong> deber&iacute;an aparecer las trabajadoras que est&aacute;n trabajando en ese momento. Si la p&aacute;gina no carga, verificar la conexi&oacute;n a Internet. El sistema est&aacute; en Railway con disponibilidad 24/7.</p>
+
+  <h3 class="sub">&iquest;Puedo acceder desde el m&oacute;vil?</h3>
+  <p>S&iacute;, el panel de administraci&oacute;n funciona en m&oacute;vil aunque est&aacute; optimizado para ordenador. El panel de las trabajadoras est&aacute; dise&ntilde;ado espec&iacute;ficamente para m&oacute;vil.</p>
+
+  <h3 class="sub">&iquest;Qu&eacute; ocurre si una trabajadora tiene contrato a tiempo parcial?</h3>
+  <p>El sistema ya tiene configuradas las horas diarias y d&iacute;as al mes de cada trabajadora seg&uacute;n su contrato. La jornada se cierra autom&aacute;ticamente al cumplir sus horas, sin que ella tenga que hacer nada especial.</p>
+
+  <!-- 13 -->
+  <h2 class="seccion" id="sec13"><span class="num">13</span> Calendario de festivos</h2>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#128197; Festivos&raquo;</strong>. Permite gestionar los d&iacute;as festivos que el sistema tiene en cuenta para el <strong>c&aacute;lculo de horas del &uacute;ltimo d&iacute;a del mes</strong> (cuadre mensual). Los festivos nacionales 2025-2027 ya est&aacute;n cargados por defecto.</p>
+
+  <h3 class="sub">13.1 Ver los festivos cargados</h3>
+  <p>Al entrar en la secci&oacute;n se muestra la tabla de festivos del a&ntilde;o en curso. Se puede cambiar el a&ntilde;o con el desplegable.</p>
+
+  <h3 class="sub">13.2 A&ntilde;adir un festivo</h3>
+  <ol class="pasos">
+    <li>Pulsar <strong>&laquo;+ Nuevo festivo&raquo;</strong>.</li>
+    <li>Seleccionar la fecha.</li>
+    <li>Escribir el nombre del festivo (ej: &laquo;D&iacute;a de la Regi&oacute;n de Murcia&raquo;).</li>
+    <li>Pulsar &laquo;Guardar&raquo;.</li>
+  </ol>
+
+  <h3 class="sub">13.3 Eliminar un festivo</h3>
+  <p>Pulsar el bot&oacute;n <strong>&laquo;&#128465; Eliminar&raquo;</strong> en la fila del festivo a borrar.</p>
+
+  <div class="info">
+    &#128161; <strong>&iquest;Para qu&eacute; sirven los festivos?</strong> El sistema distribuye las 169 horas mensuales entre los d&iacute;as laborables del mes (excluyendo s&aacute;bados, domingos y festivos). El &uacute;ltimo d&iacute;a h&aacute;bil del mes, la trabajadora trabaja las horas que queden para completar el total. Los festivos bien configurados garantizan que ese c&aacute;lculo sea correcto.
+  </div>
+
+  <!-- 14 -->
+  <h2 class="seccion" id="sec14"><span class="num">14</span> Imprimir carnets QR (todos a la vez)</h2>
+  <p>La p&aacute;gina de carnets permite generar e imprimir de una sola vez los carnets de identificaci&oacute;n de <strong>todas las trabajadoras activas</strong>, con su c&oacute;digo QR personal en formato tarjeta de cr&eacute;dito (85,6 &times; 54 mm).</p>
+
+  <h3 class="sub">14.1 Acceder</h3>
+  <p>Men&uacute; lateral &rarr; <strong>&laquo;&#128424;&#65039; Imprimir Carnets&raquo;</strong>, o directamente en:</p>
+  <div class="url-box">&#128279; https://control-horario-production-e57a.up.railway.app/carnets.html</div>
+  <p>Se requiere usuario y contrase&ntilde;a de administrador (las mismas que el panel).</p>
+
+  <h3 class="sub">14.2 Filtrar por empresa</h3>
+  <p>Usar el desplegable superior para mostrar solo las trabajadoras de una empresa concreta, o dejar &laquo;Todas las empresas&raquo; para verlas todas.</p>
+
+  <h3 class="sub">14.3 Imprimir</h3>
+  <ol class="pasos">
+    <li>Esperar a que se generen todos los carnets (puede tardar unos segundos si hay muchas trabajadoras).</li>
+    <li>Pulsar el bot&oacute;n <strong>&laquo;&#128424;&#65039; Imprimir&raquo;</strong>.</li>
+    <li>En el di&aacute;logo de impresi&oacute;n del navegador, seleccionar <strong>&laquo;Sin m&aacute;rgenes&raquo;</strong> y activar <strong>&laquo;Gr&aacute;ficos de fondo&raquo;</strong> (o &laquo;Colores de fondo&raquo;) para que el dise&ntilde;o azul se imprima correctamente.</li>
+    <li>Imprimir en papel normal (idealmente cartulina) y recortar por las l&iacute;neas.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>&#9888;&#65039; NOTA:</strong> El c&oacute;digo QR de cada carnet enlaza directamente al panel de fichaje de esa trabajadora. Si se regenera el QR desde &laquo;&#128101; Trabajadoras &rarr; QR &rarr; &#128260; Regenerar&raquo;, el carnet anterior queda inv&aacute;lido y hay que imprimir uno nuevo.
+  </div>
+
+  <!-- PIE -->
+  <div class="pie">
+    <p>Para cualquier consulta t&eacute;cnica: <strong>ia@webgest.net</strong></p>
+    <p style="margin-top:6px;font-size:11px">Webgest &copy; 2026 &mdash; Control Horario v1.1</p>
+  </div>
+
 </div>
 </body>
 </html>
