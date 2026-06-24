@@ -1084,6 +1084,53 @@ app.get('/api/admin/pdf/:trabajadora_id', adminMiddleware, (req, res) => {
     'en cumplimiento del art. 34.9 del Estatuto de los Trabajadores (RD-ley 8/2019). ' +
     'Se conservará durante un mínimo de 4 años.', { align: 'justify' }
   );
+
+  // ── Bloque de firma ──────────────────────────────────────────
+  if (doc.y > 650) doc.addPage();
+  doc.moveDown(2);
+
+  doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor('#000000').stroke();
+  doc.moveDown(0.6);
+
+  doc.font('Helvetica-Bold').fontSize(10)
+     .text('CONFORMIDAD DE LA PERSONA TRABAJADORA', { align: 'center' });
+  doc.moveDown(0.5);
+
+  doc.font('Helvetica').fontSize(9).text(
+    'La persona trabajadora abajo firmante declara que los datos reflejados en este registro ' +
+    'son veraces y corresponden a su jornada laboral real durante el período indicado, ' +
+    'en cumplimiento del artículo 34.9 del Estatuto de los Trabajadores (RD-ley 8/2019).',
+    { align: 'justify' }
+  );
+  doc.moveDown(1.5);
+
+  const sigY = doc.y;
+  const colIzq = 50;
+  const colDcha = 310;
+  const lineW = 200;
+
+  doc.font('Helvetica-Bold').fontSize(9).text('La trabajadora:', colIzq, sigY);
+  doc.moveDown(0.4);
+  let y1 = doc.y;
+  doc.font('Helvetica').fontSize(8)
+     .text('Nombre: ' + t.apellidos + ', ' + t.nombre, colIzq, y1, { width: 230 });
+  doc.text('DNI: ' + t.dni, colIzq, y1 + 13, { width: 230 });
+  doc.text('En _____________, a ___ de ________________ de 20___', colIzq, y1 + 26, { width: 230 });
+  const firmaY = y1 + 55;
+  doc.moveTo(colIzq, firmaY).lineTo(colIzq + lineW, firmaY).strokeColor('#555555').lineWidth(0.5).stroke();
+  doc.font('Helvetica').fontSize(7).fillColor('#555555')
+     .text('Firma de la trabajadora', colIzq, firmaY + 3, { width: lineW, align: 'center' });
+
+  doc.font('Helvetica-Bold').fontSize(9).fillColor('#000000')
+     .text('Por la empresa (Webgest):', colDcha, sigY, { width: 235 });
+  doc.font('Helvetica').fontSize(8)
+     .text('Nombre y cargo: ______________________________', colDcha, y1, { width: 235 });
+  doc.text('DNI/NIF: ____________________', colDcha, y1 + 13, { width: 235 });
+  doc.text('En _____________, a ___ de ________________ de 20___', colDcha, y1 + 26, { width: 235 });
+  doc.moveTo(colDcha, firmaY).lineTo(colDcha + lineW, firmaY).strokeColor('#555555').lineWidth(0.5).stroke();
+  doc.font('Helvetica').fontSize(7).fillColor('#555555')
+     .text('Firma y sello de la empresa', colDcha, firmaY + 3, { width: lineW, align: 'center' });
+
   doc.end();
 });
 
