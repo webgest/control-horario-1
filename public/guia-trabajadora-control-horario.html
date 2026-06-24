@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gu&iacute;a Control Horario &mdash; Trabajadoras</title>
+<style>
+  @page { size: A4; margin: 15mm 18mm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #f5f5f5;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    margin: 0 auto 20px;
+    padding: 15mm 18mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  /* CABECERA */
+  .header {
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    color: #fff;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-icon { font-size: 2.8rem; line-height: 1; }
+  .header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 3px; }
+  .header p { font-size: 0.88rem; opacity: 0.85; }
+
+  /* SECCIONES */
+  .section {
+    margin-bottom: 20px;
+    border: 2px solid #E3F2FD;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .section-title {
+    background: #1565C0;
+    color: #fff;
+    padding: 9px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-body { padding: 14px 16px; }
+
+  /* URL BOX */
+  .url-box {
+    background: #E3F2FD;
+    border: 2px dashed #1565C0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .url-box .label { font-size: 0.78rem; color: #546E7A; font-weight: 600; text-transform: uppercase; }
+  .url-box .url { font-size: 1.05rem; font-weight: 800; color: #0D47A1; letter-spacing: 0.02em; }
+
+  /* PASOS */
+  .steps { list-style: none; }
+  .steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #EEF2F7;
+  }
+  .steps li:last-child { border-bottom: none; }
+  .step-num {
+    background: #1565C0;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    min-width: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+  }
+  .step-text { flex: 1; padding-top: 3px; line-height: 1.5; }
+  .step-text strong { color: #0D47A1; }
+  .step-note {
+    font-size: 0.8rem; color: #546E7A;
+    background: #F8F9FA;
+    border-radius: 5px;
+    padding: 3px 8px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* DOS COLUMNAS (iOS / Android) */
+  .two-col { display: flex; gap: 14px; margin-bottom: 4px; }
+  .col {
+    flex: 1;
+    border: 1.5px solid #CFD8DC;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .col-title {
+    padding: 7px 12px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .col-ios .col-title { background: #F3E5F5; color: #6A1B9A; }
+  .col-android .col-title { background: #E8F5E9; color: #2E7D32; }
+  .col-body { padding: 10px 12px; }
+  .col-body ol { padding-left: 18px; }
+  .col-body ol li { margin-bottom: 6px; line-height: 1.45; font-size: 0.88rem; }
+  .col-body ol li strong { color: #333; }
+
+  /* BOTONES DE FICHAJE */
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-card {
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-entrada  { background: #E8F5E9; border: 2px solid #2E7D32; }
+  .btn-pausa    { background: #FFF8E1; border: 2px solid #F57F17; }
+  .btn-reanudar { background: #E3F2FD; border: 2px solid #1565C0; }
+  .btn-salida   { background: #FCE4EC; border: 2px solid #B71C1C; }
+  .btn-icon { font-size: 1.6rem; line-height: 1; }
+  .btn-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 2px; }
+  .btn-entrada  .btn-name { color: #2E7D32; }
+  .btn-pausa    .btn-name { color: #E65100; }
+  .btn-reanudar .btn-name { color: #1565C0; }
+  .btn-salida   .btn-name { color: #B71C1C; }
+  .btn-desc { font-size: 0.78rem; color: #546E7A; line-height: 1.4; }
+
+  /* ALERTA */
+  .alert {
+    background: #FFF3E0;
+    border: 2px solid #FF6F00;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .alert-icon { font-size: 1.4rem; line-height: 1; }
+  .alert-text { flex: 1; font-size: 0.85rem; line-height: 1.5; }
+  .alert-text strong { color: #E65100; }
+
+  /* CONTACTO */
+  .contact {
+    background: #E8EAF6;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .contact-icon { font-size: 2rem; line-height: 1; }
+  .contact-text { flex: 1; }
+  .contact-text .label { font-size: 0.78rem; color: #546E7A; font-weight: 600; text-transform: uppercase; }
+  .contact-text .phone { font-size: 1.3rem; font-weight: 800; color: #283593; letter-spacing: 0.05em; }
+  .contact-text .sub { font-size: 0.8rem; color: #546E7A; }
+
+  /* LOGIN BOX */
+  .login-box {
+    background: #F1F8E9;
+    border: 1.5px solid #7CB342;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .login-box .icon { font-size: 1.5rem; }
+  .login-box .text { font-size: 0.88rem; line-height: 1.6; }
+  .login-box .text strong { color: #33691E; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    color: #90A4AE;
+    font-size: 0.72rem;
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #EEF2F7;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #fff; }
+    .page {
+      box-shadow: none;
+      margin: 0;
+      padding: 12mm 15mm;
+      width: 100%;
+      min-height: 0;
+    }
+    .two-col { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="header-icon">&#9200;</div>
+    <div>
+      <h1>Control Horario &mdash; Gu&iacute;a de la Trabajadora</h1>
+      <p>C&oacute;mo instalar la app en tu m&oacute;vil y c&oacute;mo registrar tu jornada laboral</p>
+    </div>
+  </div>
+
+  <!-- DIRECCION WEB -->
+  <div class="url-box">
+    <div class="label">Direcci&oacute;n de la aplicaci&oacute;n</div>
+    <div class="url">control-horario-production-e57a.up.railway.app</div>
+  </div>
+
+  <!-- SECCION 1: INSTALAR EN MOVIL -->
+  <div class="section">
+    <div class="section-title">&#128241; PASO 1 &mdash; A&ntilde;adir la app a tu pantalla de inicio</div>
+    <div class="section-body">
+      <p style="margin-bottom: 12px; font-size:0.88rem; color:#546E7A;">Instala la aplicaci&oacute;n en tu m&oacute;vil como si fuera una app normal. No hace falta descargar nada de la tienda.</p>
+
+      <div class="two-col">
+        <!-- iOS -->
+        <div class="col col-ios">
+          <div class="col-title">&#127822; iPhone / iPad (Safari)</div>
+          <div class="col-body">
+            <ol>
+              <li>Abre <strong>Safari</strong> (el navegador del iPhone)</li>
+              <li>Escribe la direcci&oacute;n web de arriba y pulsa Ir</li>
+              <li>Pulsa el bot&oacute;n de <strong>compartir</strong> (el cuadro con una flecha hacia arriba, en la barra inferior)</li>
+              <li>Desp&aacute;zate hacia abajo y toca <strong>&ldquo;A&ntilde;adir a pantalla de inicio&rdquo;</strong></li>
+              <li>Escribe el nombre <strong>&ldquo;Control Horario&rdquo;</strong> y pulsa <strong>A&ntilde;adir</strong></li>
+            </ol>
+          </div>
+        </div>
+        <!-- Android -->
+        <div class="col col-android">
+          <div class="col-title">&#129302; Android (Chrome)</div>
+          <div class="col-body">
+            <ol>
+              <li>Abre <strong>Chrome</strong> (el navegador de Android)</li>
+              <li>Escribe la direcci&oacute;n web de arriba y pulsa Ir</li>
+              <li>Pulsa los <strong>tres puntos</strong> del men&uacute; (arriba a la derecha)</li>
+              <li>Toca <strong>&ldquo;A&ntilde;adir a pantalla de inicio&rdquo;</strong> o <strong>&ldquo;Instalar app&rdquo;</strong></li>
+              <li>Confirma pulsando <strong>A&ntilde;adir</strong> o <strong>Instalar</strong></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert" style="margin-top:12px; margin-bottom:0;">
+        <div class="alert-icon">&#128161;</div>
+        <div class="alert-text">Despu&eacute;s de instalarlo, aparecer&aacute; un icono en tu pantalla de inicio. La pr&oacute;xima vez que quieras fichar, simplemente pulsa ese icono &mdash; <strong>no hace falta abrir el navegador</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCION 2: ENTRAR EN LA APP -->
+  <div class="section">
+    <div class="section-title">&#128273; PASO 2 &mdash; Entrar en la aplicaci&oacute;n</div>
+    <div class="section-body">
+      <div class="login-box">
+        <div class="icon">&#128100;</div>
+        <div class="text">
+          Para entrar necesitas tu <strong>DNI</strong> y un <strong>PIN de 4 d&iacute;gitos</strong>.<br>
+          Tu empresa o Webgest te habr&aacute;n facilitado ese PIN. Si no lo tienes, llama al n&uacute;mero de contacto de abajo.
+        </div>
+      </div>
+
+      <ul class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            Abre la app y escribe tu <strong>DNI</strong> (letras en may&uacute;sculas, sin guiones ni espacios)
+            <br><span class="step-note">Ejemplo: 23233727R</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            Escribe tu <strong>PIN de 4 d&iacute;gitos</strong> y pulsa <strong>ENTRAR</strong>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            Ya est&aacute;s dentro. Ver&aacute;s un bot&oacute;n grande en el centro de la pantalla
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECCION 3: FICHAR -->
+  <div class="section">
+    <div class="section-title">&#9201; PASO 3 &mdash; C&oacute;mo registrar tu jornada</div>
+    <div class="section-body">
+      <div class="buttons-grid">
+        <div class="btn-card btn-entrada">
+          <div class="btn-icon">&#9654;&#65039;</div>
+          <div>
+            <div class="btn-name">FICHAR ENTRADA</div>
+            <div class="btn-desc">Pulsa al empezar a trabajar. La app mostrar&aacute; a qu&eacute; hora termina tu jornada de hoy.</div>
+          </div>
+        </div>
+        <div class="btn-card btn-pausa">
+          <div class="btn-icon">&#9646;&#9646;</div>
+          <div>
+            <div class="btn-name">PAUSAR JORNADA</div>
+            <div class="btn-desc">Pulsa cuando hagas una pausa (descanso, comida, etc.). El tiempo parado no cuenta.</div>
+          </div>
+        </div>
+        <div class="btn-card btn-reanudar">
+          <div class="btn-icon">&#9654;&#65039;</div>
+          <div>
+            <div class="btn-name">REANUDAR JORNADA</div>
+            <div class="btn-desc">Pulsa cuando vuelvas a trabajar despu&eacute;s de una pausa. Obligatorio &mdash; no te olvides.</div>
+          </div>
+        </div>
+        <div class="btn-card btn-salida">
+          <div class="btn-icon">&#9632;&#65039;</div>
+          <div>
+            <div class="btn-name">FICHAR SALIDA</div>
+            <div class="btn-desc">Pulsa al terminar tu jornada. Si no lo haces, el sistema la cierra autom&aacute;ticamente.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert">
+        <div class="alert-icon">&#9888;&#65039;</div>
+        <div class="alert-text">
+          <strong>Importante:</strong> Cuando hayas completado tus horas del d&iacute;a, la app te avisar&aacute; con el mensaje <em>&ldquo;Tu jornada laboral ha finalizado. Que descanse.&rdquo;</em> &mdash; en ese momento <strong>no puedes seguir trabajando ni fichar m&aacute;s tiempo ese d&iacute;a</strong>. El sistema cierra la jornada autom&aacute;ticamente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="contact">
+    <div class="contact-icon">&#128222;</div>
+    <div class="contact-text">
+      <div class="label">&iquest;Tienes alg&uacute;n problema o duda?</div>
+      <div class="phone">655 588 770</div>
+      <div class="sub">Webgest &mdash; Gesti&oacute;n del Control Horario</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Control Horario &mdash; Webgest &nbsp;&middot;&nbsp; Este documento es para uso interno de la empresa &nbsp;&middot;&nbsp; control-horario-production-e57a.up.railway.app
+  </div>
+
+</div>
+
+</body>
+</html>
