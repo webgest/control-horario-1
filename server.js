@@ -20,6 +20,8 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET   = process.env.JWT_SECRET   || 'ch1-secret-dev-2026';
 const ADMIN_USER   = process.env.ADMIN_USER   || 'webgest';
 const ADMIN_PASS   = process.env.ADMIN_PASSWORD || 'Webgest2026!';
+// Cuando se define, la app sirve solo esa empresa (1-5). Sin definir → app global Webgest.
+const COMPANY_ID   = process.env.COMPANY_ID ? parseInt(process.env.COMPANY_ID) : null;
 
 // ── Base de datos ──────────────────────────────────────────
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'data', 'control.db');
@@ -208,19 +210,14 @@ db.prepare('UPDATE trabajadoras SET horas_dia = 8.0 WHERE horas_dia = 8.3').run(
 }
 
 // ── Insertar datos iniciales (solo si no existen) ──────────
+// Si COMPANY_ID está definido, solo se siembra esa empresa.
+// Sin COMPANY_ID → se siembran todas (app global Webgest).
 const seedData = () => {
   const count = db.prepare('SELECT COUNT(*) as n FROM empresas').get();
   if (count.n > 0) return;
 
   const insEmpresa = db.prepare(`INSERT INTO empresas (nombre, nif, ccc) VALUES (?,?,?)`);
-  const e1 = insEmpresa.run('CONTRATACIONES LIMPIMUR, S.L.', 'B30381230', '30/1009098-56').lastInsertRowid;
-  const e2 = insEmpresa.run('GRUPO LIMPIMUR EXPANSIÓN, S.L.', 'B73579872', '30/1184917-14').lastInsertRowid;
-  const e3 = insEmpresa.run('CAMPICO BLANCO SCOOP', 'F73863276', '30126518563').lastInsertRowid;
-  const e4 = insEmpresa.run('GIOMUR S. COOP', 'F73869620', '30132392117').lastInsertRowid;
-  const e5 = insEmpresa.run('SGN AYUDA A DOMICILIO S. COOP', 'F05546171', '30132391612').lastInsertRowid;
-
   const pin0000 = bcrypt.hashSync('0000', 10);
-
   const insTrab = db.prepare(`
     INSERT INTO trabajadoras
       (empresa_id, nombre, apellidos, dni, pin_hash, horas_dia, dias_mes, situacion, es_prueba, codigo_carnet)
@@ -228,61 +225,92 @@ const seedData = () => {
   `);
   const nc = () => crypto.randomBytes(6).toString('hex');
 
-  // ── EMPRESA 1 ──
-  insTrab.run(e1,'Miñarro García','Isabel Pilar','23233727R',pin0000,4.0,30,'activa',0,nc());
-  insTrab.run(e1,'Monteagudo Pujalte','María Carmen','27476364N',pin0000,8.0,31,'activa',0,nc());
-  insTrab.run(e1,'Navarro Rodríguez','Francisca','23226904D',pin0000,4.0,30,'activa',0,nc());
-  insTrab.run(e1,'Palomeque Pérez','Vanessa Mabel','60246144J',pin0000,4.0,30,'activa',0,nc());
-  insTrab.run(e1,'Sánchez Jiménez','Juana María','23280620C',pin0000,6.0,30,'activa',0,nc());
+  const COMPANIES_DATA = [
+    {
+      ref: 1, nombre: 'CONTRATACIONES LIMPIMUR, S.L.', nif: 'B30381230', ccc: '30/1009098-56',
+      workers: [
+        ['Miñarro García','Isabel Pilar','23233727R',4.0,30,'activa'],
+        ['Monteagudo Pujalte','María Carmen','27476364N',8.0,31,'activa'],
+        ['Navarro Rodríguez','Francisca','23226904D',4.0,30,'activa'],
+        ['Palomeque Pérez','Vanessa Mabel','60246144J',4.0,30,'activa'],
+        ['Sánchez Jiménez','Juana María','23280620C',6.0,30,'activa'],
+      ]
+    },
+    {
+      ref: 2, nombre: 'GRUPO LIMPIMUR EXPANSIÓN, S.L.', nif: 'B73579872', ccc: '30/1184917-14',
+      workers: [
+        ['García Carrillo','Dolores','23237143J',8.0,30,'activa'],
+        ['Moya Vas','María Agustina','23260032V',8.0,30,'activa'],
+        ['Vargas Aguilera','José','23249444D',4.0,30,'activa'],
+      ]
+    },
+    {
+      ref: 3, nombre: 'CAMPICO BLANCO SCOOP', nif: 'F73863276', ccc: '30126518563',
+      workers: [
+        ['Cardoso Riverol','Himilce Caridad','30296065M',8.0,30,'activa'],
+        ['Cedillo Abrigo','Lady Jovanna','60391608W',8.0,30,'activa'],
+        ['Celdrán Garrigós','Concepción','34800714N',5.99,21,'activa'],
+        ['Fernández Campoy','Mercedes','23251913V',4.0,21,'activa'],
+        ['Fernández López','Isabel','23247227T',8.0,30,'activa'],
+        ['Fernández López','Miguel','23247228R',8.0,30,'activa'],
+        ['González Venteo','María José','17469048L',4.0,20,'activa'],
+        ['Leines Muquinche','Wilson Arturo','24462214N',8.0,30,'activa'],
+        ['López Beltrán','Caridad Rosario','23251554A',8.0,30,'activa'],
+        ['López Molina','Ángeles','23273704G',5.99,21,'activa'],
+        ['López Molina','María','23273705M',8.0,30,'activa'],
+        ['Lozoya Alcázar','Juana','23245046G',8.0,30,'activa'],
+        ['Martínez Mora','Agustina','23233737B',8.0,30,'activa'],
+        ['Poveda Hernández','Rosario','23233171C',8.0,30,'activa'],
+        ['Quiñonero Pérez','María Luz','23293489D',5.0,20,'activa'],
+        ['Romero Celdrán','Andrea','49854509P',5.99,21,'activa'],
+        ['Vásquez Cortés','María del Carmen','Y1088105N',8.0,30,'activa'],
+      ]
+    },
+    {
+      ref: 4, nombre: 'GIOMUR S. COOP', nif: 'F73869620', ccc: '30132392117',
+      workers: [
+        ['Abellán Romera','Concepción','23224638C',8.0,30,'activa'],
+        ['Bonillo Caballero','Juana María','23276570H',8.0,30,'activa'],
+        ['Cardeño Hurtado','Diana Cristina','Y0630036B',8.0,30,'activa'],
+        ['Jouilik El Habbarri','Najat','23833818E',8.0,30,'activa'],
+        ['López Jódar','Catalina Ángel','23249849T',8.0,30,'activa'],
+        ['Manzanares Alcázar','Andrea','23288049C',8.0,30,'activa'],
+        ['Miñarro García','María Isabel','23224185G',5.99,21,'activa'],
+        ['Pérez Estrada','Vilma Araceli','13381919J',8.0,30,'activa'],
+        ['Pérez Jordán','María Carmen','23229357R',8.0,30,'activa'],
+        ['Pérez Pérez','María','23239758Y',8.0,30,'activa'],
+        ['Reinaldos López','Ascensión','23227468K',8.0,30,'it'],
+        ['Salinas Macas','Lady Tamara','30296461X',5.99,21,'activa'],
+        ['Vera Ruiz','María Isabel','23252196R',3.99,4,'activa'],
+      ]
+    },
+    {
+      ref: 5, nombre: 'SGN AYUDA A DOMICILIO S. COOP', nif: 'F05546171', ccc: '30132391612',
+      workers: [
+        ['Giner Ayén','Josefa','23245307N',8.0,30,'activa'],
+        ['Jódar Bravo','Francisca','23258691X',8.0,30,'activa'],
+        ['Periago Montero','María Huertas','23255645T',4.0,21,'activa'],
+        ['Sánchez Alonso','María Carmen','23255753Q',5.99,21,'activa'],
+        ['Sánchez Giménez','Carmen','23291722J',6.0,21,'activa'],
+      ]
+    },
+  ];
 
-  // ── EMPRESA 2 ──
-  insTrab.run(e2,'García Carrillo','Dolores','23237143J',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e2,'Moya Vas','María Agustina','23260032V',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e2,'Vargas Aguilera','José','23249444D',pin0000,4.0,30,'activa',0,nc());
+  let primeraEmpresaId = null;
 
-  // ── EMPRESA 3 ──
-  insTrab.run(e3,'Cardoso Riverol','Himilce Caridad','30296065M',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Cedillo Abrigo','Lady Jovanna','60391608W',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Celdrán Garrigós','Concepción','34800714N',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e3,'Fernández Campoy','Mercedes','23251913V',pin0000,4.0,21,'activa',0,nc());
-  insTrab.run(e3,'Fernández López','Isabel','23247227T',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Fernández López','Miguel','23247228R',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'González Venteo','María José','17469048L',pin0000,4.0,20,'activa',0,nc());
-  insTrab.run(e3,'Leines Muquinche','Wilson Arturo','24462214N',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'López Beltrán','Caridad Rosario','23251554A',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'López Molina','Ángeles','23273704G',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e3,'López Molina','María','23273705M',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Lozoya Alcázar','Juana','23245046G',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Martínez Mora','Agustina','23233737B',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Poveda Hernández','Rosario','23233171C',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e3,'Quiñonero Pérez','María Luz','23293489D',pin0000,5.0,20,'activa',0,nc());
-  insTrab.run(e3,'Romero Celdrán','Andrea','49854509P',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e3,'Vásquez Cortés','María del Carmen','Y1088105N',pin0000,8.0,30,'activa',0,nc());
+  for (const comp of COMPANIES_DATA) {
+    if (COMPANY_ID && comp.ref !== COMPANY_ID) continue;
+    const eid = insEmpresa.run(comp.nombre, comp.nif, comp.ccc).lastInsertRowid;
+    if (!primeraEmpresaId) primeraEmpresaId = eid;
+    for (const [nombre, apellidos, dni, horas_dia, dias_mes, situacion] of comp.workers) {
+      insTrab.run(eid, nombre, apellidos, dni, pin0000, horas_dia, dias_mes, situacion, 0, nc());
+    }
+  }
 
-  // ── EMPRESA 4 ──
-  insTrab.run(e4,'Abellán Romera','Concepción','23224638C',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Bonillo Caballero','Juana María','23276570H',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Cardeño Hurtado','Diana Cristina','Y0630036B',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Jouilik El Habbarri','Najat','23833818E',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'López Jódar','Catalina Ángel','23249849T',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Manzanares Alcázar','Andrea','23288049C',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Miñarro García','María Isabel','23224185G',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e4,'Pérez Estrada','Vilma Araceli','13381919J',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Pérez Jordán','María Carmen','23229357R',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Pérez Pérez','María','23239758Y',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e4,'Reinaldos López','Ascensión','23227468K',pin0000,8.0,30,'it',0,nc());
-  insTrab.run(e4,'Salinas Macas','Lady Tamara','30296461X',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e4,'Vera Ruiz','María Isabel','23252196R',pin0000,3.99,4,'activa',0,nc());
-
-  // ── EMPRESA 5 ──
-  insTrab.run(e5,'Giner Ayén','Josefa','23245307N',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e5,'Jódar Bravo','Francisca','23258691X',pin0000,8.0,30,'activa',0,nc());
-  insTrab.run(e5,'Periago Montero','María Huertas','23255645T',pin0000,4.0,21,'activa',0,nc());
-  insTrab.run(e5,'Sánchez Alonso','María Carmen','23255753Q',pin0000,5.99,21,'activa',0,nc());
-  insTrab.run(e5,'Sánchez Giménez','Carmen','23291722J',pin0000,6.0,21,'activa',0,nc());
-
-  // ── TRABAJADORA DE PRUEBA ──
-  insTrab.run(e1,'ZPRUEBA TEST','','00000000Z',pin0000,8.0,30,'activa',1,nc());
+  // Trabajadora de prueba (en la primera empresa sembrada)
+  if (primeraEmpresaId) {
+    insTrab.run(primeraEmpresaId, 'ZPRUEBA TEST', '', '00000000Z', pin0000, 8.0, 30, 'activa', 1, nc());
+  }
 
   console.log('✅ Datos iniciales insertados correctamente');
 };
